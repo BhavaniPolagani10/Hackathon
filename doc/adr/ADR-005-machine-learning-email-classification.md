@@ -57,6 +57,12 @@ We will implement a supervised machine learning approach for email classificatio
    Ensemble Decision → Category + Confidence Score
    ```
 
+   **Performance Thresholds:**
+   - BERT primary inference: < 2 seconds
+   - If BERT latency > 3 seconds: Automatic fallback to Random Forest only
+   - Ensemble mode (both models): Only when confidence between 0.70-0.85
+   - Random Forest fallback: < 100ms, used when BERT service unavailable
+
 5. **Confidence Thresholds:**
    ```
    Confidence >= 0.90: Auto-classify

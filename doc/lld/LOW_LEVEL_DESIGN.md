@@ -119,6 +119,8 @@ graph TB
 
 ### 3.1 Email Service
 
+**API Gateway Selection:** We will start with Kong as the primary choice (open-source, well-documented, proven at scale). AWS API Gateway remains a viable alternative if we need tighter AWS integration or fully managed scaling in the future.
+
 #### 3.1.1 Component Diagram
 
 ```mermaid
@@ -580,11 +582,18 @@ erDiagram
 
 **Configuration Validation:**
 ```
+# Cache compatibility rules at service startup
+compatibility_rules_cache = {}
+
+function loadCompatibilityRulesOnStartup():
+    # Load all rules once at service initialization
+    compatibility_rules_cache = loadAllCompatibilityRules()
+
 function validateMachineConfiguration(config):
     errors = []
     
-    # Load compatibility rules
-    rules = loadCompatibilityRules(config.base_model)
+    # Retrieve cached compatibility rules
+    rules = compatibility_rules_cache.get(config.base_model)
     
     # Validate bucket size
     valid_buckets = rules.compatible_buckets

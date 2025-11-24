@@ -242,7 +242,7 @@ def warm_cache():
 
 **Cache Stampede:**
 ```python
-def get_with_lock(key, fetch_func):
+def get_with_lock(key, fetch_func, max_retries=30):
     """Prevent cache stampede with distributed lock"""
     data = redis.get(key)
     if data:
@@ -261,8 +261,16 @@ def get_with_lock(key, fetch_func):
             redis.delete(lock_key)
     else:
         # Wait for other process to populate cache
-        time.sleep(0.1)
-        return get_with_lock(key, fetch_func)
+        # Retry with exponential backoff up to max_retries
+        for attempt in range(max_retries):
+            time.sleep(0.1 * (1.5 ** attempt))  # Exponential backoff
+            data = redis.get(key)
+            if data:
+                return data
+        
+        # Timeout - fetch data anyway to prevent indefinite wait
+        logger.warning(f"Cache lock timeout for key {key}, fetching anyway")
+        return fetch_func()
 ```
 
 **Memory Management:**
