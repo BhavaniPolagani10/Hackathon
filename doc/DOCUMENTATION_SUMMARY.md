@@ -18,7 +18,7 @@
 | High-Level Design | 1 | 16,000+ characters, 1 C4 Context diagram |
 | Low-Level Design | 1 | 47,500+ characters, 20 diagrams (components, data models, sequences) |
 | Architecture Decision Records | 6 | 38,000+ characters, covering 6 major decisions |
-| C4 Diagrams | 1 | 55,000+ characters, 16 C4 diagrams (System, Container, 9 Components, 5 Code, Deployment) |
+| C4 Diagrams | 1 | 55,000+ characters, 17 diagrams (1 System Context + 1 Container + 9 Components + 5 Code + 1 Deployment) |
 | Workflow Diagrams | 1 | 48,000+ characters, 29 workflow and process diagrams |
 | Business Glossary | 1 | 16,600+ characters, 50+ terms |
 | Documentation Index | 1 | 14,000+ characters, navigation guide |

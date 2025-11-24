@@ -137,7 +137,7 @@ This documentation suite addresses the 10 critical pain points in heavy machiner
 
 **Target Audience:** All technical stakeholders
 
-**Total Diagrams:** 16 comprehensive C4 diagrams covering all architectural levels
+**Total Diagrams:** 17 comprehensive diagrams covering all architectural levels
 
 **Diagram Levels:**
 
