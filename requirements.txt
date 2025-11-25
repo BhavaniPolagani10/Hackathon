@@ -1,14 +1,14 @@
 The discussion focuses on improving sales and contract management processes using automation and AI. Key points include:
 
-Use Case 1: Automating Quotations & Purchase Orders
+Use Case 1: Automating Quotations  &  Automating Purchase Orders by sales person to the vendors
 
 Track deals, stock availability, delivery dates, and profitability.
-Create dashboards for contract-level profit tracking.
+Create Leads dashboards for contract-level profit tracking.
 
-Visibility & Opportunity Management
+Visibility of leads Managements & Opportunity Management
 
 Ensure leads or opportunities are not missed.
-Provide visibility to managers without escalation, maintaining relationships.
+Provide visibility to managers without escalation, maintaining relationships with sales person.
 
 Pain Points in Current Sales Process
 
@@ -27,4 +27,5 @@ Provide end-to-end visibility for optimization and continuous learning.
 Feedback & Continuous Improvement
 
 Analyze missed or closed opportunities each quarter.
-Incorporate learnings into future processes.
+Incorporate learnings into future processes improvements for new geography expansions or enable new revenue streams .
+
