@@ -1,93 +1,30 @@
-1. Customers don’t get replies on time
-Salespeople travel a lot. They may be on a site, in a meeting, or on the road.
+The discussion focuses on improving sales and contract management processes using automation and AI. Key points include:
 
-So many customer emails stay unread.
-What happens:
-The customer waits
-Competitors respond faster
-Dealer loses business
- 
-. Important customer inquiries get lost in the mailbox
-Dealers get many emails every day — enquiries, service issues, tender alerts, supplier messages, etc.
+Use Case 1: Automating Quotations & Purchase Orders
 
-Everything is mixed.
-What happens:
-Some good opportunities are lost
-Salesperson forgets to follow up
-No proper tracking
- 
-3. Salespeople don’t have complete customer details
-To prepare a quote or order, they need things like:
-Customer address
-Tax number
-Previous machine history
-Required machine model
-But this info is often missing.
-What happens:
-They keep asking other teams
-Work slows down
-Errors happen in the order
- 
- 
-4. Wrong machine details are used in quotes
-Machines have many options: bucket size, tires, attachments, warranty, etc.
+Track deals, stock availability, delivery dates, and profitability.
+Create dashboards for contract-level profit tracking.
 
-Salespeople sometimes pick the wrong combination.
-What happens:
-Customer gets the wrong quote
-Rework happens
-Delay in closing the deal
- 
-5. Approvals take too long
-To give a discount or confirm stock, salespeople need approval from their manager or accounts team.
+Visibility & Opportunity Management
 
-These approvals usually happen through email.
-What happens:
-Manager responds late
-Deal gets delayed
-Customer becomes frustrated
- 
-6. Creating purchase orders takes too much time
-Before ordering a machine from the manufacturer, dealers must prepare a purchase order (PO).
+Ensure leads or opportunities are not missed.
+Provide visibility to managers without escalation, maintaining relationships.
 
-Salespeople collect details from emails, ERP system, and specifications.
-What happens:
-Takes 30–90 minutes
-Many manual mistakes
-Order to the manufacturer gets delayed
- 
-7. Sales team doesn’t know real-time stock availability
-Dealers store machines in different yards or branches.
+Pain Points in Current Sales Process
 
-Salespeople often don’t know what’s in stock right now.
-What happens:
-They promise machines that are not available
-Or they think stock is empty and lose the sale
-Confusion everywhere
- 
-**********8. No clear tracking of ongoing deals
-Salespeople track deals using:
-WhatsApp
-Notes
-Excel sheets
-Email history
-There is no single dashboard.
-What happens:
-Sales manager has no clear picture
-Deals get stuck without anyone noticing
-Forecasting becomes difficult
- 
-9. Salespeople forget to follow up
-They get busy and forget to check back with the customer after sending a quote.
-What happens:
-The customer moves to another dealer
-Opportunity is lost
-Sales team looks unprofessional
- 
-10. Tender documents and proposals are slow to prepare
-For government or corporate customers, dealers must fill long forms and attach many documents.
-What happens:
-Takes hours to prepare
-They copy from old documents → mistakes happen
-Dealer gets rejected for small errors
- 
+Excessive paperwork for deal closure.
+Steps include:
+
+Preparing rough cost estimates and timelines.
+Generating formal quotations.
+Internal approvals from finance and legal teams.
+
+AI Integration
+
+Enable collaboration on a single contract safeguarding all stakeholders’ interests.
+Provide end-to-end visibility for optimization and continuous learning.
+
+Feedback & Continuous Improvement
+
+Analyze missed or closed opportunities each quarter.
+Incorporate learnings into future processes.
