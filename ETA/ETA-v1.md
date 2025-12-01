@@ -1,4 +1,4 @@
-# Estimated Time of Arrival (ETA) Document v1.0
+# Estimated Time of Arrival (ETA) Document v1.1
 
 ## Automated Quotation and Purchase Order Management System
 
@@ -501,7 +501,7 @@ The team composition ensures cross-functional collaboration with clear ownership
 | Version | Date | Author | Description |
 |---------|------|--------|-------------|
 | 1.0 | December 2025 | Cross-Functional Team | Initial ETA Document |
-| 1.1 | December 2025 | Cross-Functional Team | Updated team composition to 4-person team structure |
+| 1.1 | December 2025 | Cross-Functional Team | Updated team composition from traditional PM/Engineering roles to 4-person AI/ML specialized team structure |
 
 ---
 
