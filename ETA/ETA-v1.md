@@ -2,6 +2,8 @@
 
 ## Automated Quotation and Purchase Order Management System
 
+### Designed for Team of 4
+
 ---
 
 ## Document Information
@@ -10,11 +12,19 @@
 - **Date:** December 2025
 - **Status:** Final
 - **Overall Timeline:** 12 Days
+- **Team Size:** 4 Members
 - **Prepared By:** Cross-Functional Team
 
 ---
 
-## Team Composition
+## Team Composition (Team of 4)
+
+| Team Member | Role | Responsibilities |
+|-------------|------|-----------------|
+| **Member 1** | Product Manager (PM) | Define requirements, prioritize features, stakeholder communication, acceptance criteria validation, UX design, GTM strategy, presentation preparation |
+| **Member 2** | Tech Lead / Full-Stack Developer | Technical architecture, code quality, backend development, database design, security implementation, code reviews, technical decision-making |
+| **Member 3** | Full-Stack Developer A | Frontend development, UI implementation, API integration, testing, vendor portal development |
+| **Member 4** | Full-Stack Developer B | Backend development, notification systems, tracking services, integrations, demo environment setup |
 
 | Role | Responsibilities |
 |------|-----------------|
@@ -28,6 +38,12 @@
 ## Executive Summary
 
 This document provides Estimated Time of Arrival (ETA) for all tasks related to the Automated Quotation and Purchase Order Management System based on the PRD and MLP documents. The overall timeline is **12 days**, distributed across Solution, Build, Data, Security, User Experience, Evaluation, Cost Optimizations, GTM & Adoption, Presentation, and Demo Video deliverables.
+
+**This ETA is designed for a team of 4 members:**
+- **Member 1:** Product Manager (PM) - Requirements, UX, GTM, presentations
+- **Member 2:** Tech Lead / Full-Stack Developer - Architecture, backend, security, code quality
+- **Member 3:** Full-Stack Developer A - Frontend, UI, vendor portal, dashboards
+- **Member 4:** Full-Stack Developer B - Backend, notifications, integrations, data setup
 
 ---
 
@@ -425,19 +441,21 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 ## 12-Day Timeline Visualization
 
 ```
-Day 1   |===== Solution =====|====== UX Design ======|
-Day 2   |===== Solution =====|====== Build P1 =======|====== Data =======|
-Day 3   |====== Build P1 ====|====== Data =======|===== Security =====|
-Day 4   |====== Build P1 ====|====== Data =======|===== Security =====|====== UX ======|
-Day 5   |====== Build P2 ====|===== Security =====|
-Day 6   |====== Build P2 ====|
-Day 7   |====== Build P2 ====|===== GTM & Adoption =====|
-Day 8   |====== Build P3 ====|===== Evaluation =====|===== GTM & Adoption =====|
-Day 9   |===== Evaluation ====|===== Cost Optimizations =====|===== GTM & Adoption =====|
-Day 10  |===== Cost Optimizations =====|===== GTM & Adoption =====|===== Presentation =====|
-Day 11  |===== Presentation =====|===== Demo Video =====|
-Day 12  |===== Demo Video =====|
+Day 1   |===== Solution (M1, M2) =====|====== UX Design (M1, M3) ======|
+Day 2   |===== Solution (M1, M2) =====|====== Build P1 (M3, M4) =======|====== Data (M2, M4) =======|
+Day 3   |====== Build P1 (M3, M4) ====|====== Data (M2, M4) =======|===== Security (M2, M3) =====|
+Day 4   |====== Build P1 (M3, M4) ====|====== Data (M2, M4) =======|===== Security (M2, M3) =====|====== UX (M1, M3) ======|
+Day 5   |====== Build P2 (M2, M3, M4) ====|===== Security (M2, M3) =====|
+Day 6   |====== Build P2 (M2, M3, M4) ====|
+Day 7   |====== Build P2 (M2, M3, M4) ====|===== GTM & Adoption (M1, M4) =====|
+Day 8   |====== Build P3 (M2, M3, M4) ====|===== Evaluation (M1, M2) =====|===== GTM & Adoption (M1, M4) =====|
+Day 9   |===== Evaluation (M1, M2) ====|===== Cost Optimizations (M2, M1) =====|===== GTM & Adoption (M1, M4) =====|
+Day 10  |===== Cost Optimizations (M2, M1) =====|===== GTM & Adoption (M1, M4) =====|===== Presentation (M1, M2) =====|
+Day 11  |===== Presentation (M1, M2) =====|===== Demo Video (M1, M3, M4) =====|
+Day 12  |===== Demo Video (M1, M3, M4) =====|
 ```
+
+**Legend:** M1 = Member 1 (PM), M2 = Member 2 (Tech Lead), M3 = Member 3 (Dev A), M4 = Member 4 (Dev B)
 
 ---
 
