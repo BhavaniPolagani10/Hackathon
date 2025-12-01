@@ -78,23 +78,27 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 #### Phase 1: Foundation (Days 2-4)
 
+*Note: Tasks run in parallel across team members where possible.*
+
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Set up development environment and infrastructure | 0.5 day | Developers | Dev environment ready |
-| Build basic quotation generation engine | 1 day | Developers | Quotation service |
-| Implement stock availability integration | 0.5 day | Developers | Inventory API integration |
-| Create initial quotation templates (3 templates) | 0.5 day | Developers | Template designs |
-| Build automatic PO generation from quotes | 1 day | Developers | PO generation service |
+| Set up development environment and infrastructure | 0.5 day | Developer A | Dev environment ready |
+| Build basic quotation generation engine | 1.5 days | Developer B | Quotation service |
+| Implement stock availability integration | 0.5 day | Developer C | Inventory API integration |
+| Create initial quotation templates (3 templates) | 0.5 day | Developer C | Template designs |
+| Build automatic PO generation from quotes | 1.5 days | Developer D | PO generation service |
 
 #### Phase 2: Core Features (Days 5-7)
 
+*Note: Tasks run in parallel across team members where possible.*
+
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Implement basic email notification system | 0.5 day | Developers | Notification service |
-| Create vendor acknowledgment workflow | 0.5 day | Developers | Vendor workflow |
-| Develop PO tracking dashboard | 0.5 day | Developers | Tracking dashboard |
-| Basic AI cost estimation integration | 0.5 day | Developers | AI cost module |
-| Build vendor selection logic | 0.5 day | Developers | Vendor selection service |
+| Implement basic email notification system | 1 day | Developer A | Notification service |
+| Create vendor acknowledgment workflow | 1 day | Developer B | Vendor workflow |
+| Develop PO tracking dashboard | 1 day | Developer C | Tracking dashboard |
+| Basic AI cost estimation integration | 1 day | Developer D | AI cost module |
+| Build vendor selection logic | 1 day | Developer A | Vendor selection service |
 
 #### Phase 3: Integration & Testing (Day 8)
 
@@ -116,14 +120,16 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 **Description:** Design and implement data architecture, storage, and data flow for the system.
 
+*Note: Tasks run in parallel across team members where possible. Sequential dependencies are managed within team.*
+
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Design database schema (PostgreSQL) | 0.5 day | Tech Lead, Developers | Database schema |
-| Set up data storage (Quote DB, PO DB, Vendor Catalog) | 0.5 day | Developers | Database instances |
-| Implement data migration scripts | 0.5 day | Developers | Migration scripts |
-| Configure caching layer (Redis) | 0.5 day | Developers | Cache configuration |
-| Set up historical pricing data storage | 0.5 day | Developers | Historical data store |
-| Data validation and integrity checks | 0.5 day | Developers | Validation rules |
+| Design database schema (PostgreSQL) | 1 day | Tech Lead | Database schema |
+| Set up data storage (Quote DB, PO DB, Vendor Catalog) | 1 day | Developer A | Database instances |
+| Implement data migration scripts | 0.5 day | Developer B | Migration scripts |
+| Configure caching layer (Redis) | 0.5 day | Developer C | Cache configuration |
+| Set up historical pricing data storage | 0.5 day | Developer B | Historical data store |
+| Data validation and integrity checks | 0.5 day | Developer C | Validation rules |
 
 **Data Components:**
 - Quote Database
@@ -175,12 +181,14 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 **Description:** Design and implement user interface and user experience for all personas.
 
+*Note: Design tasks (Days 1-2) run in parallel, followed by implementation tasks (Days 3-4). Some tasks overlap with Build phase.*
+
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Define UX requirements and user flows | 0.5 day | PM | UX requirements doc |
-| Design quotation creation interface | 0.5 day | PM, Developers | UI wireframes |
-| Design PO management dashboard | 0.5 day | PM, Developers | Dashboard mockups |
-| Design manager/operations dashboard | 0.5 day | PM, Developers | Manager UI |
+| Define UX requirements and user flows | 1 day | PM | UX requirements doc |
+| Design quotation creation interface | 1 day | PM, Developers | UI wireframes |
+| Design PO management dashboard | 1 day | PM, Developers | Dashboard mockups |
+| Design manager/operations dashboard | 1 day | PM, Developers | Manager UI |
 | Design vendor portal interface | 0.5 day | Developers | Vendor portal UI |
 | Implement responsive design | 0.5 day | Developers | Responsive components |
 | User flow testing and refinement | 0.5 day | PM, Developers | UX test results |
