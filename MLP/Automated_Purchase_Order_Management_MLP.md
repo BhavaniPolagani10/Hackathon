@@ -3,7 +3,7 @@
 ## Executive Summary
 
 **Use Case:** Automated Purchase Order Management  
-**Target Users:** Sales Representatives, Procurement Team, Vendors/Partners, Operations Managers  
+**Target Users:** Sales Representatives, Procurement Team, Vendors/Partners, Operations Managers, Legal Team, Finance Team  
 **Primary Goal:** Streamline the purchase order lifecycle from quote approval to delivery tracking through intelligent automation and vendor integration.
 
 ---
@@ -91,6 +91,34 @@ An intelligent automated purchase order management system that:
 - Early warning for potential delays
 - Automated reporting and analytics
 - Process efficiency improvements
+
+### Legal Team - "Compliant Casey"
+
+**Pain Points:**
+- Manual review of contract terms in purchase orders
+- Difficulty ensuring compliance with vendor agreements
+- Lack of standardized legal clauses across POs
+- Time-consuming review process for high-value orders
+
+**Goals:**
+- Automated compliance checks for PO terms
+- Standardized legal templates and clauses
+- Quick access to vendor contract history
+- Streamlined approval workflow for legal review
+
+### Finance Team - "Analytical Amy"
+
+**Pain Points:**
+- Manual tracking of PO spending and budgets
+- Delayed visibility into financial commitments
+- Difficulty reconciling invoices with POs
+- Lack of real-time budget impact analysis
+
+**Goals:**
+- Real-time budget tracking and spending visibility
+- Automated invoice-to-PO matching
+- Financial reporting and cost analysis
+- Budget threshold alerts and approvals
 
 ---
 

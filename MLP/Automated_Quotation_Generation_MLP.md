@@ -3,7 +3,7 @@
 ## Executive Summary
 
 **Use Case:** Automated Quotation Generation  
-**Target Users:** Sales Representatives, Sales Managers, Finance Approvers  
+**Target Users:** Sales Representatives, Sales Managers, Finance Approvers, Legal Team, Operations Team  
 **Primary Goal:** Transform manual quotation processes into an automated, AI-powered system that generates accurate quotations in minutes instead of hours.
 
 ---
@@ -72,6 +72,34 @@ An AI-powered automated quotation generation system that:
 - Quick, informed approval decisions
 - Maintain pricing and margin guidelines
 - Reduce review time while ensuring compliance
+
+### Legal Team - "Compliant Casey"
+
+**Pain Points:**
+- Manual review of terms and conditions in quotations
+- Lack of standardized legal language across quotes
+- Difficulty tracking contractual obligations
+- Time-consuming review for non-standard agreements
+
+**Goals:**
+- Automated inclusion of compliant terms and conditions
+- Standardized legal templates for quotations
+- Quick identification of non-standard terms requiring review
+- Streamlined legal approval workflow
+
+### Operations Team - "Efficient Evan"
+
+**Pain Points:**
+- Lack of visibility into quoted delivery commitments
+- Disconnection between quotes and operational capacity
+- Difficulty assessing feasibility of quoted timelines
+- Manual handoff from sales to operations
+
+**Goals:**
+- Real-time visibility into quotation pipeline
+- Integration with capacity planning systems
+- Automated feasibility checks for delivery timelines
+- Seamless transition from quote to fulfillment
 
 ---
 
