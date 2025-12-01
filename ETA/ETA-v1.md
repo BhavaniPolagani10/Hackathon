@@ -26,11 +26,12 @@
 | **Member 3** | Full-Stack Developer A | Frontend development, UI implementation, API integration, testing, vendor portal development |
 | **Member 4** | Full-Stack Developer B | Backend development, notification systems, tracking services, integrations, demo environment setup |
 
-### Team Structure Notes
-- **Team Size:** 4 members (lean team optimized for a 12-day hackathon timeline)
-- **Cross-functional:** Each member handles multiple responsibilities to maximize efficiency
-- **Collaboration:** Daily standups and pair programming sessions for knowledge sharing
-- **Backup Coverage:** Tech Lead provides backup for development tasks; developers support PM with demos and documentation
+| Role | Responsibilities |
+|------|-----------------|
+| **Value Lead / Domain SME (Strategy Intelligence Curator)** | Defines the business problem, measurable outcomes, and alignment with enterprise goals |
+| **AI Engineer / Agent Builder (Cognitive Systems Designer)** | Designs agent workflows, reasoning processes, and orchestration |
+| **Data & Platform Engineer (Autonomous Systems Steward)** | Integrates data, manages platforms, and ensures security, governance, and resilience |
+| **UX / QA Engineer (Assurance Experience Designer)** | Ensures usability, trust, fairness, and quality validation |
 
 ---
 
@@ -48,18 +49,18 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 ## ETA Summary Table
 
-| Task Category | Start Day | End Day | Duration | Owner(s) |
-|---------------|-----------|---------|----------|----------|
-| Solution | Day 1 | Day 2 | 2 days | Member 1 (PM), Member 2 (Tech Lead) |
-| Build | Day 2 | Day 8 | 7 days | Member 2, Member 3, Member 4 |
-| Data | Day 2 | Day 4 | 3 days | Member 2 (Tech Lead), Member 4 |
-| Security | Day 3 | Day 5 | 3 days | Member 2 (Tech Lead), Member 3 |
-| User Experience | Day 1 | Day 4 | 4 days | Member 1 (PM), Member 3 |
-| Evaluation | Day 8 | Day 9 | 2 days | Member 1 (PM), Member 2 (Tech Lead) |
-| Cost Optimizations | Day 9 | Day 10 | 2 days | Member 2 (Tech Lead), Member 1 (PM) |
-| GTM & Adoption | Day 7 | Day 10 | 4 days | Member 1 (PM), Member 4 |
-| Presentation | Day 10 | Day 11 | 2 days | Member 1 (PM), Member 2 (Tech Lead) |
-| Demo Video | Day 11 | Day 12 | 2 days | Member 3, Member 4, Member 1 (PM) |
+| Task Category | Start Day | End Day | Duration | Owner |
+|---------------|-----------|---------|----------|-------|
+| Solution | Day 1 | Day 2 | 2 days | Value Lead, AI Engineer |
+| Build | Day 2 | Day 8 | 7 days | AI Engineer, Data & Platform Engineer |
+| Data | Day 2 | Day 4 | 3 days | Data & Platform Engineer, AI Engineer |
+| Security | Day 3 | Day 5 | 3 days | Data & Platform Engineer |
+| User Experience | Day 1 | Day 4 | 4 days | UX / QA Engineer, Value Lead |
+| Evaluation | Day 8 | Day 9 | 2 days | UX / QA Engineer, Value Lead |
+| Cost Optimizations | Day 9 | Day 10 | 2 days | AI Engineer, Data & Platform Engineer |
+| GTM & Adoption | Day 7 | Day 10 | 4 days | Value Lead |
+| Presentation | Day 10 | Day 11 | 2 days | Value Lead, AI Engineer |
+| Demo Video | Day 11 | Day 12 | 2 days | AI Engineer, UX / QA Engineer |
 
 ---
 
@@ -73,10 +74,10 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Finalize solution architecture | 0.5 day | Member 2 (Tech Lead) | Architecture document |
-| Define system components and interactions | 0.5 day | Member 2 (Tech Lead) | Component diagram |
-| Review AI/ML integration approach | 0.5 day | Member 2 (Tech Lead) | AI integration plan |
-| Validate integration requirements (ERP, CRM, Inventory) | 0.5 day | Member 1 (PM), Member 2 (Tech Lead) | Integration specification |
+| Finalize solution architecture | 0.5 day | AI Engineer | Architecture document |
+| Define system components and interactions | 0.5 day | AI Engineer, Data & Platform Engineer | Component diagram |
+| Review AI/ML integration approach | 0.5 day | AI Engineer | AI integration plan |
+| Validate integration requirements (ERP, CRM, Inventory) | 0.5 day | Value Lead, AI Engineer | Integration specification |
 
 **Dependencies:**
 - PRD/Multiphase_PRD.md review completed
@@ -97,11 +98,11 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Set up development environment and infrastructure | 0.5 day | Member 2 (Tech Lead) | Dev environment ready |
-| Build basic quotation generation engine | 1.5 days | Member 3 | Quotation service |
-| Implement stock availability integration | 0.5 day | Member 4 | Inventory API integration |
-| Create initial quotation templates (3 templates) | 0.5 day | Member 3 | Template designs |
-| Build automatic PO generation from quotes | 1.5 days | Member 4 | PO generation service |
+| Set up development environment and infrastructure | 0.5 day | Data & Platform Engineer | Dev environment ready |
+| Build basic quotation generation engine | 1.5 days | AI Engineer | Quotation service |
+| Implement stock availability integration | 0.5 day | Data & Platform Engineer | Inventory API integration |
+| Create initial quotation templates (3 templates) | 0.5 day | UX / QA Engineer | Template designs |
+| Build automatic PO generation from quotes | 1.5 days | AI Engineer | PO generation service |
 
 #### Phase 2: Core Features (Days 5-7)
 
@@ -109,18 +110,18 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Implement basic email notification system | 1 day | Member 4 | Notification service |
-| Create vendor acknowledgment workflow | 1 day | Member 3 | Vendor workflow |
-| Develop PO tracking dashboard | 1 day | Member 3 | Tracking dashboard |
-| Basic AI cost estimation integration | 1 day | Member 2 (Tech Lead) | AI cost module |
-| Build vendor selection logic | 1 day | Member 4 | Vendor selection service |
+| Implement basic email notification system | 1 day | Data & Platform Engineer | Notification service |
+| Create vendor acknowledgment workflow | 1 day | AI Engineer | Vendor workflow |
+| Develop PO tracking dashboard | 1 day | UX / QA Engineer | Tracking dashboard |
+| Basic AI cost estimation integration | 1 day | AI Engineer | AI cost module |
+| Build vendor selection logic | 1 day | AI Engineer | Vendor selection service |
 
 #### Phase 3: Integration & Testing (Day 8)
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| End-to-end integration testing | 0.5 day | Member 2, Member 3, Member 4 | Integration test results |
-| Bug fixes and optimization | 0.5 day | Member 2, Member 3, Member 4 | Stable build |
+| End-to-end integration testing | 0.5 day | UX / QA Engineer | Integration test results |
+| Bug fixes and optimization | 0.5 day | AI Engineer, Data & Platform Engineer | Stable build |
 
 **Dependencies:**
 - Solution architecture finalized
@@ -139,12 +140,12 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Design database schema (PostgreSQL) | 1 day | Member 2 (Tech Lead) | Database schema |
-| Set up data storage (Quote DB, PO DB, Vendor Catalog) | 1 day | Member 4 | Database instances |
-| Implement data migration scripts | 0.5 day | Member 4 | Migration scripts |
-| Configure caching layer (Redis) | 0.5 day | Member 2 (Tech Lead) | Cache configuration |
-| Set up historical pricing data storage | 0.5 day | Member 4 | Historical data store |
-| Data validation and integrity checks | 0.5 day | Member 2 (Tech Lead) | Validation rules |
+| Design database schema (PostgreSQL) | 1 day | Data & Platform Engineer | Database schema |
+| Set up data storage (Quote DB, PO DB, Vendor Catalog) | 1 day | Data & Platform Engineer | Database instances |
+| Implement data migration scripts | 0.5 day | Data & Platform Engineer | Migration scripts |
+| Configure caching layer (Redis) | 0.5 day | Data & Platform Engineer | Cache configuration |
+| Set up historical pricing data storage | 0.5 day | Data & Platform Engineer | Historical data store |
+| Data validation and integrity checks | 0.5 day | Data & Platform Engineer | Validation rules |
 
 **Data Components:**
 - Quote Database
@@ -170,12 +171,12 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Implement authentication system | 0.5 day | Member 2 (Tech Lead) | Auth module |
-| Role-based access control (RBAC) | 0.5 day | Member 3 | RBAC implementation |
-| API security (rate limiting, validation) | 0.5 day | Member 2 (Tech Lead) | Secure APIs |
-| Data encryption at rest and in transit | 0.5 day | Member 3 | Encryption implementation |
-| Security audit and vulnerability assessment | 0.5 day | Member 2 (Tech Lead) | Security audit report |
-| Compliance verification (GDPR, data privacy) | 0.5 day | Member 1 (PM), Member 2 (Tech Lead) | Compliance checklist |
+| Implement authentication system | 0.5 day | Data & Platform Engineer | Auth module |
+| Role-based access control (RBAC) | 0.5 day | Data & Platform Engineer | RBAC implementation |
+| API security (rate limiting, validation) | 0.5 day | Data & Platform Engineer | Secure APIs |
+| Data encryption at rest and in transit | 0.5 day | Data & Platform Engineer | Encryption implementation |
+| Security audit and vulnerability assessment | 0.5 day | Data & Platform Engineer | Security audit report |
+| Compliance verification (GDPR, data privacy) | 0.5 day | Value Lead, Data & Platform Engineer | Compliance checklist |
 
 **Security Requirements:**
 - User authentication and session management
@@ -200,14 +201,14 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Define UX requirements and user flows | 1 day | Member 1 (PM) | UX requirements doc |
-| Design quotation creation interface | 1 day | Member 1 (PM), Member 3 | UI wireframes |
-| Design PO management dashboard | 1 day | Member 1 (PM), Member 3 | Dashboard mockups |
-| Design manager/operations dashboard | 1 day | Member 3 | Manager UI |
-| Design vendor portal interface | 0.5 day | Member 3 | Vendor portal UI |
-| Implement responsive design | 0.5 day | Member 3 | Responsive components |
-| User flow testing and refinement | 0.5 day | Member 1 (PM), Member 3 | UX test results |
-| Accessibility compliance check | 0.5 day | Member 3 | Accessibility report |
+| Define UX requirements and user flows | 1 day | UX / QA Engineer | UX requirements doc |
+| Design quotation creation interface | 1 day | UX / QA Engineer | UI wireframes |
+| Design PO management dashboard | 1 day | UX / QA Engineer | Dashboard mockups |
+| Design manager/operations dashboard | 1 day | UX / QA Engineer | Manager UI |
+| Design vendor portal interface | 0.5 day | UX / QA Engineer | Vendor portal UI |
+| Implement responsive design | 0.5 day | UX / QA Engineer | Responsive components |
+| User flow testing and refinement | 0.5 day | UX / QA Engineer, Value Lead | UX test results |
+| Accessibility compliance check | 0.5 day | UX / QA Engineer | Accessibility report |
 
 **UX Design Principles Applied:**
 - Speed First: Minimize clicks to generate a quote
@@ -238,10 +239,10 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Feature completeness evaluation | 0.5 day | Member 1 (PM), Member 2 (Tech Lead) | Feature checklist |
-| Performance testing and analysis | 0.5 day | Member 2 (Tech Lead), Member 3, Member 4 | Performance report |
-| User acceptance testing (UAT) | 0.5 day | Member 1 (PM) | UAT results |
-| Document evaluation findings | 0.5 day | Member 1 (PM) | Evaluation document |
+| Feature completeness evaluation | 0.5 day | Value Lead, AI Engineer | Feature checklist |
+| Performance testing and analysis | 0.5 day | UX / QA Engineer, Data & Platform Engineer | Performance report |
+| User acceptance testing (UAT) | 0.5 day | UX / QA Engineer | UAT results |
+| Document evaluation findings | 0.5 day | Value Lead | Evaluation document |
 
 #### Evaluation Summary
 
@@ -282,10 +283,10 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Infrastructure cost analysis | 0.5 day | Member 2 (Tech Lead) | Cost analysis report |
-| Identify optimization opportunities | 0.5 day | Member 2 (Tech Lead), Member 1 (PM) | Optimization list |
-| Implement cost-saving measures | 0.5 day | Member 2 (Tech Lead), Member 4 | Optimized configuration |
-| Document ROI and cost projections | 0.5 day | Member 1 (PM) | Cost optimization report |
+| Infrastructure cost analysis | 0.5 day | Data & Platform Engineer | Cost analysis report |
+| Identify optimization opportunities | 0.5 day | AI Engineer, Value Lead | Optimization list |
+| Implement cost-saving measures | 0.5 day | Data & Platform Engineer | Optimized configuration |
+| Document ROI and cost projections | 0.5 day | Value Lead | Cost optimization report |
 
 **Cost Optimization Strategies:**
 
@@ -313,13 +314,13 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Define target market segments | 0.5 day | Member 1 (PM) | Market segmentation doc |
-| Develop value propositions by persona | 0.5 day | Member 1 (PM) | Value prop document |
-| Create adoption and rollout plan | 0.5 day | Member 1 (PM), Member 4 | Rollout plan |
-| Training material development | 1 day | Member 1 (PM), Member 4 | Training materials |
-| Define success metrics and KPIs | 0.5 day | Member 1 (PM) | KPI dashboard spec |
-| Change management strategy | 0.5 day | Member 1 (PM), Member 4 | Change management plan |
-| Internal launch preparation | 0.5 day | Member 4 | Launch checklist |
+| Define target market segments | 0.5 day | Value Lead | Market segmentation doc |
+| Develop value propositions by persona | 0.5 day | Value Lead | Value prop document |
+| Create adoption and rollout plan | 0.5 day | Value Lead | Rollout plan |
+| Training material development | 1 day | UX / QA Engineer | Training materials |
+| Define success metrics and KPIs | 0.5 day | Value Lead | KPI dashboard spec |
+| Change management strategy | 0.5 day | Value Lead | Change management plan |
+| Internal launch preparation | 0.5 day | Value Lead | Launch checklist |
 
 **GTM Strategy:**
 
@@ -357,11 +358,11 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Create executive summary presentation | 0.5 day | Member 1 (PM) | Executive slides |
-| Develop technical architecture presentation | 0.5 day | Member 2 (Tech Lead) | Technical slides |
-| Prepare feature demonstration flow | 0.5 day | Member 1 (PM), Member 3, Member 4 | Demo script |
-| Design visual aids and diagrams | 0.25 day | Member 1 (PM) | Visual assets |
-| Review and finalize presentation | 0.25 day | Member 1 (PM), Member 2 (Tech Lead) | Final presentation |
+| Create executive summary presentation | 0.5 day | Value Lead | Executive slides |
+| Develop technical architecture presentation | 0.5 day | AI Engineer | Technical slides |
+| Prepare feature demonstration flow | 0.5 day | UX / QA Engineer | Demo script |
+| Design visual aids and diagrams | 0.25 day | UX / QA Engineer | Visual assets |
+| Review and finalize presentation | 0.25 day | Value Lead, AI Engineer | Final presentation |
 
 **Presentation Outline:**
 
@@ -406,11 +407,11 @@ This document provides Estimated Time of Arrival (ETA) for all tasks related to 
 
 | Task | Duration | Owner | Deliverable |
 |------|----------|-------|-------------|
-| Plan demo video script and storyboard | 0.5 day | Member 1 (PM) | Video storyboard |
-| Set up demo environment with sample data | 0.25 day | Member 3, Member 4 | Demo environment |
-| Record demo video segments | 0.5 day | Member 1 (PM), Member 3, Member 4 | Raw video footage |
-| Edit and produce final video | 0.5 day | Member 1 (PM), Member 3 | Edited video |
-| Add narration and captions | 0.25 day | Member 1 (PM) | Final demo video |
+| Plan demo video script and storyboard | 0.5 day | Value Lead | Video storyboard |
+| Set up demo environment with sample data | 0.25 day | Data & Platform Engineer | Demo environment |
+| Record demo video segments | 0.5 day | UX / QA Engineer, AI Engineer | Raw video footage |
+| Edit and produce final video | 0.5 day | UX / QA Engineer | Edited video |
+| Add narration and captions | 0.25 day | Value Lead | Final demo video |
 
 **Demo Video Structure:**
 
@@ -504,12 +505,12 @@ The team composition ensures cross-functional collaboration with clear ownership
 
 ## Approval & Sign-off
 
-| Role | Team Member | Signature | Date |
-|------|-------------|-----------|------|
-| Product Manager | Member 1 | | |
-| Tech Lead / Full-Stack Developer | Member 2 | | |
-| Full-Stack Developer A | Member 3 | | |
-| Full-Stack Developer B | Member 4 | | |
+| Role | Name | Signature | Date |
+|------|------|-----------|------|
+| Value Lead / Domain SME | | | |
+| AI Engineer / Agent Builder | | | |
+| Data & Platform Engineer | | | |
+| UX / QA Engineer | | | |
 
 ---
 
@@ -518,14 +519,13 @@ The team composition ensures cross-functional collaboration with clear ownership
 | Version | Date | Author | Description |
 |---------|------|--------|-------------|
 | 1.0 | December 2025 | Cross-Functional Team | Initial ETA Document |
-| 1.1 | December 2025 | Cross-Functional Team | Updated ETA for team of 4 with specific member assignments |
+| 1.1 | December 2025 | Cross-Functional Team | Updated team composition from traditional PM/Engineering roles to 4-person AI/ML specialized team structure |
 
 ---
 
 **Document Version:** 1.1  
 **Last Updated:** December 2025  
-**Document Owner:** Product Management Team  
-**Team Size:** 4 Members
+**Document Owner:** Cross-Functional Team
 
 ---
 
