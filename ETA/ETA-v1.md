@@ -449,7 +449,7 @@ Day 6   |====== Build P2 (M2, M3, M4) ====|
 Day 7   |====== Build P2 (M2, M3, M4) ====|===== GTM & Adoption (M1, M4) =====|
 Day 8   |====== Build P3 (M2, M3, M4) ====|===== Evaluation (M1, M2) =====|===== GTM & Adoption (M1, M4) =====|
 Day 9   |===== Evaluation (M1, M2) ====|===== Cost Optimizations (M2, M1) =====|===== GTM & Adoption (M1, M4) =====|
-Day 10  |===== Cost Optimizations (M2, M4) =====|===== GTM & Adoption (M1, M4) =====|===== Presentation (M1, M2) =====|
+Day 10  |===== Cost Optimizations (M2, M1) =====|===== GTM & Adoption (M1, M4) =====|===== Presentation (M1, M2) =====|
 Day 11  |===== Presentation (M1, M2) =====|===== Demo Video (M1, M3, M4) =====|
 Day 12  |===== Demo Video (M1, M3, M4) =====|
 ```
