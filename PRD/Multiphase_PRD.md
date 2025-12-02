@@ -80,6 +80,24 @@ This Multiphase PRD is based on the following assumptions derived from the requi
 3. **Approval Workflows:** Existing approval hierarchies for quotations and purchase orders will be maintained in the new system.
 4. **Vendor Performance Tracking:** Organizations are interested in tracking and optimizing vendor performance over time.
 
+### 2.6 11-Day Accelerated Delivery Assumptions
+
+The following additional assumptions are critical to achieving the 11-day delivery timeline:
+
+1. **Pre-trained AI Models:** Pre-trained AI models for cost estimation and vendor selection are available for deployment. These models have been trained on historical data and require only configuration and fine-tuning rather than training from scratch.
+2. **Dedicated Resource Allocation:** Full-time dedicated resources from development, QA, and operations teams are available for the entire 11-day period with no competing priorities.
+3. **Parallel Workstreams:** Multiple development workstreams can execute in parallel without blocking dependencies.
+4. **Simplified Initial Scope:** The initial MLP release prioritizes core functionality:
+   - 2 quotation templates (Standard and Detailed) - additional custom templates will be added post-launch
+   - 3 major currencies (USD, EUR, GBP) - additional currencies will be added post-launch
+   - 2 major carrier integrations - additional carriers will be added post-launch
+5. **Pre-existing Development Environment:** Development, staging, and production environments are already provisioned and configured.
+6. **API Documentation Available:** All external system APIs (inventory, ERP, CRM, carriers) have documented and accessible endpoints.
+7. **Interim Success Metrics:** The 11-day delivery targets are interim metrics that will be improved through continuous optimization:
+   - AI cost estimation: 85% accuracy initially, targeting 95%+ post-optimization
+   - Issue detection: 12+ hours advance notice initially, targeting 48+ hours post-optimization
+   - Cost savings: Functional vendor selection initially, targeting 10%+ cost savings with refined models
+
 ---
 
 ## 3. Problem Statement
@@ -895,13 +913,17 @@ sequenceDiagram
 The following features are planned for subsequent iterations after the 11-day MLP launch:
 
 **Phase 2 (Weeks 2-4 Post-Launch):**
+- Additional quotation templates (3rd template: Executive Summary format)
 - Multi-language support (5+ languages)
+- Additional currency support (7+ additional currencies)
 - Mobile app functionality
 - Advanced CRM integrations
 - EDI integration capabilities
+- Additional carrier integrations
 
 **Phase 3 (Weeks 5-8 Post-Launch):**
-- Refined AI models based on usage data
+- Refined AI models based on usage data (targeting 95%+ accuracy)
+- Advanced issue detection (targeting 48+ hour advance notice)
 - Volume discount automation
 - Custom template builder
 - Predictive delay detection
