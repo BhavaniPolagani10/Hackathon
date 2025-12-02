@@ -822,7 +822,7 @@ sequenceDiagram
 **Quotation Generation:**
 - [ ] Set up quotation service infrastructure
 - [ ] Build basic quote generation engine
-- [ ] Create initial template designs (2 templates)
+- [ ] Create initial template designs (2 templates: Standard and Detailed)
 - [ ] Implement stock availability integration
 - [ ] Develop basic cost calculation logic
 
