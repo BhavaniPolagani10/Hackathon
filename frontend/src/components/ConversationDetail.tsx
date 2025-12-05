@@ -7,6 +7,16 @@ interface ConversationDetailProps {
   conversation: Conversation;
 }
 
+function formatMessageDate(date: string, timestamp: string): string {
+  if (date === 'Today') {
+    return timestamp;
+  }
+  if (date === 'Yesterday') {
+    return `Yesterday, ${timestamp}`;
+  }
+  return `${date}, ${timestamp}`;
+}
+
 function ConversationDetail({ client, conversation }: ConversationDetailProps) {
   // Group messages by date
   const messagesByDate: { [key: string]: typeof conversation.messages } = {};
@@ -16,6 +26,9 @@ function ConversationDetail({ client, conversation }: ConversationDetailProps) {
     }
     messagesByDate[msg.date].push(msg);
   });
+
+  // Get unique dates for separators
+  const dateKeys = Object.keys(messagesByDate);
 
   return (
     <div className="conversation-detail">
@@ -36,7 +49,7 @@ function ConversationDetail({ client, conversation }: ConversationDetailProps) {
         </div>
 
         <div className="conversation-messages">
-          {Object.entries(messagesByDate).map(([date, messages]) => (
+          {Object.entries(messagesByDate).map(([date, messages], index) => (
             <div key={date} className="message-date-group">
               {messages.map((msg) => (
                 <div key={msg.id} className="message-item">
@@ -53,8 +66,7 @@ function ConversationDetail({ client, conversation }: ConversationDetailProps) {
                         {msg.senderName} {msg.senderType === 'user' ? '(You)' : '(Client)'}
                       </span>
                       <span className="message-time">
-                        {date !== 'Today' && date !== 'Yesterday' ? date + ', ' : date === 'Yesterday' ? 'Yesterday, ' : ''}
-                        {msg.timestamp}
+                        {formatMessageDate(date, msg.timestamp)}
                       </span>
                     </div>
                     <p className="message-text">{msg.message}</p>
@@ -62,9 +74,9 @@ function ConversationDetail({ client, conversation }: ConversationDetailProps) {
                 </div>
               ))}
               
-              {date === 'Today' && (
+              {index < dateKeys.length - 1 && (
                 <div className="date-separator">
-                  <span>Today</span>
+                  <span>{dateKeys[index + 1]}</span>
                 </div>
               )}
             </div>

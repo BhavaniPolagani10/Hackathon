@@ -74,6 +74,7 @@
   background-color: #f9fafb;
   padding: 0 16px;
   position: relative;
+  z-index: 1;
 }
 
 .date-separator::before {
@@ -85,11 +86,6 @@
   height: 1px;
   background-color: #e5e7eb;
   z-index: 0;
-}
-
-.date-separator span {
-  position: relative;
-  z-index: 1;
 }
 
 .message-item {
