@@ -7,6 +7,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SalesTrackerPage />} />
         <Route path="/opportunities" element={<SalesTrackerPage />} />
+        <Route path="/clients" element={<SalesTrackerPage />} />
       </Routes>
     </Router>
   )

@@ -20,3 +20,33 @@ export interface Opportunity {
   taxAmount: number;
   grandTotal: number;
 }
+
+export interface Contact {
+  id: string;
+  name: string;
+  title: string;
+  avatarColor: string;
+}
+
+export interface AssociatedOpportunity {
+  id: string;
+  name: string;
+  stage: string;
+  value: number;
+  probability?: number;
+  signedDate?: string;
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  abbreviation: string;
+  abbreviationColor: string;
+  opportunityCount: number;
+  opportunityLabel: string;
+  industry: string;
+  location: string;
+  website: string;
+  associatedOpportunities: AssociatedOpportunity[];
+  keyContacts: Contact[];
+}
