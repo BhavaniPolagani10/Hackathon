@@ -1,0 +1,10 @@
+.sales-tracker-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  display: flex;
+  flex: 1;
+}
