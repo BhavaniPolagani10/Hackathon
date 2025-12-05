@@ -50,3 +50,30 @@ export interface Client {
   associatedOpportunities: AssociatedOpportunity[];
   keyContacts: Contact[];
 }
+
+export interface ConversationMessage {
+  id: string;
+  senderId: string;
+  senderName: string;
+  senderType: 'user' | 'client';
+  message: string;
+  timestamp: string;
+  date: string;
+}
+
+export interface InternalNote {
+  id: string;
+  authorId: string;
+  authorName: string;
+  title: string;
+  content: string;
+  timestamp: string;
+}
+
+export interface Conversation {
+  id: string;
+  clientId: string;
+  opportunityName: string;
+  messages: ConversationMessage[];
+  notes: InternalNote[];
+}

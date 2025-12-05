@@ -1,3 +1,4 @@
+import { Plus } from 'lucide-react';
 import { Client } from '../types';
 import './ClientSidebar.css';
 
@@ -12,6 +13,9 @@ function ClientSidebar({ clients, selectedId, onSelect }: ClientSidebarProps) {
     <aside className="client-sidebar">
       <div className="client-sidebar-header">
         <h2 className="client-sidebar-title">Clients</h2>
+        <button className="add-client-button" aria-label="Add client">
+          <Plus size={18} />
+        </button>
       </div>
       <div className="clients-list">
         {clients.map((client) => (

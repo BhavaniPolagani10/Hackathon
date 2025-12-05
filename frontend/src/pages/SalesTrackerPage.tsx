@@ -3,18 +3,20 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import OpportunityDetail from '../components/OpportunityDetail';
 import ClientSidebar from '../components/ClientSidebar';
-import ClientDetail from '../components/ClientDetail';
+import ConversationDetail from '../components/ConversationDetail';
 import { opportunities } from '../data/opportunities';
 import { clients } from '../data/clients';
+import { conversations } from '../data/conversations';
 import './SalesTrackerPage.css';
 
 function SalesTrackerPage() {
-  const [viewType, setViewType] = useState<string>('Opportunities');
+  const [viewType, setViewType] = useState<string>('Clients');
   const [selectedOpportunityId, setSelectedOpportunityId] = useState(opportunities[0]?.id || '');
   const [selectedClientId, setSelectedClientId] = useState(clients[0]?.id || '');
 
   const selectedOpportunity = opportunities.find((opp) => opp.id === selectedOpportunityId);
   const selectedClient = clients.find((client) => client.id === selectedClientId);
+  const selectedConversation = conversations.find((conv) => conv.clientId === selectedClientId);
 
   const handleViewChange = (view: string) => {
     setViewType(view);
@@ -40,7 +42,9 @@ function SalesTrackerPage() {
               selectedId={selectedClientId}
               onSelect={setSelectedClientId}
             />
-            {selectedClient && <ClientDetail client={selectedClient} />}
+            {selectedClient && selectedConversation && (
+              <ConversationDetail client={selectedClient} conversation={selectedConversation} />
+            )}
           </>
         )}
       </div>
