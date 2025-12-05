@@ -1,0 +1,223 @@
+.conversation-detail {
+  flex: 1;
+  display: flex;
+  background-color: #f9fafb;
+  height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+.conversation-detail-content {
+  flex: 1;
+  padding: 24px 32px;
+  overflow-y: auto;
+}
+
+.conversation-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.conversation-client-abbr {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+.conversation-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.conversation-client-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.conversation-opportunity {
+  font-size: 14px;
+  color: #3b82f6;
+}
+
+.conversation-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.message-date-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.date-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.date-separator span {
+  font-size: 12px;
+  color: #6b7280;
+  background-color: #f9fafb;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.date-separator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background-color: #e5e7eb;
+  z-index: 0;
+}
+
+.message-item {
+  display: flex;
+  gap: 12px;
+}
+
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.message-avatar svg {
+  width: 100%;
+  height: 100%;
+}
+
+.message-content {
+  flex: 1;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.message-sender {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.message-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.message-text {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.notes-section {
+  margin-top: 16px;
+}
+
+.note-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.note-icon {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.note-author {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.note-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.note-content {
+  background-color: #fef9c3;
+  border-left: 4px solid #eab308;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.note-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #92400e;
+  margin: 0 0 8px 0;
+}
+
+.note-text {
+  font-size: 14px;
+  color: #78350f;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.conversation-detail-sidebar {
+  width: 48px;
+  background-color: white;
+  border-left: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  gap: 8px;
+}
+
+.conversation-detail-sidebar .sidebar-action {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.conversation-detail-sidebar .sidebar-action:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.conversation-detail-sidebar .sidebar-action.active {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}

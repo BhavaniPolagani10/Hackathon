@@ -1,0 +1,126 @@
+import { Conversation } from '../types';
+
+export const conversations: Conversation[] = [
+  {
+    id: 'conv-1',
+    clientId: '1',
+    opportunityName: 'Software Upgrade',
+    messages: [
+      {
+        id: 'msg-1',
+        senderId: 'user-1',
+        senderName: 'Alex Williams',
+        senderType: 'user',
+        message: 'Initial discovery call completed. Client is reviewing the detailed proposal for the new enterprise software suite. Follow up scheduled for next Tuesday.',
+        timestamp: '10:42 AM',
+        date: 'Yesterday',
+      },
+      {
+        id: 'msg-2',
+        senderId: 'contact-1',
+        senderName: 'Johnathan Doe',
+        senderType: 'client',
+        message: '"Hi Alex, the proposal looks great. We have a few questions from our technical team. Can we set up a quick call tomorrow?"',
+        timestamp: '3:15 PM',
+        date: 'Yesterday',
+      },
+      {
+        id: 'msg-3',
+        senderId: 'user-1',
+        senderName: 'Alex Williams',
+        senderType: 'user',
+        message: '"Of course, Johnathan. I\'ve sent over a calendar invite for 2 PM. Looking forward to it."',
+        timestamp: '9:05 AM',
+        date: 'Today',
+      },
+    ],
+    notes: [
+      {
+        id: 'note-1',
+        authorId: 'user-1',
+        authorName: 'Alex Williams',
+        title: 'Internal Note',
+        content: 'Need to prep for the technical questions. Will loop in Sarah from engineering for the 2 PM call.',
+        timestamp: '9:06 AM',
+      },
+    ],
+  },
+  {
+    id: 'conv-2',
+    clientId: '2',
+    opportunityName: 'Financial Platform Modernization',
+    messages: [
+      {
+        id: 'msg-4',
+        senderId: 'user-1',
+        senderName: 'Alex Williams',
+        senderType: 'user',
+        message: 'Kicked off initial discussions with Quantum Solutions about their platform modernization needs.',
+        timestamp: '2:30 PM',
+        date: 'Monday',
+      },
+      {
+        id: 'msg-5',
+        senderId: 'contact-3',
+        senderName: 'Michael Chen',
+        senderType: 'client',
+        message: '"Thanks for the overview, Alex. We\'re excited about the possibilities. Can you send over some case studies?"',
+        timestamp: '4:00 PM',
+        date: 'Monday',
+      },
+    ],
+    notes: [],
+  },
+  {
+    id: 'conv-3',
+    clientId: '3',
+    opportunityName: 'Supply Chain Optimization',
+    messages: [
+      {
+        id: 'msg-6',
+        senderId: 'user-1',
+        senderName: 'Alex Williams',
+        senderType: 'user',
+        message: 'Discovery meeting scheduled with Apex Industries for supply chain optimization project.',
+        timestamp: '11:00 AM',
+        date: 'Today',
+      },
+    ],
+    notes: [],
+  },
+  {
+    id: 'conv-4',
+    clientId: '4',
+    opportunityName: 'Enterprise Software Implementation',
+    messages: [
+      {
+        id: 'msg-7',
+        senderId: 'user-1',
+        senderName: 'Alex Williams',
+        senderType: 'user',
+        message: 'Contract signed! Enterprise Software Implementation project is officially closed - won.',
+        timestamp: '10:00 AM',
+        date: 'Feb 20',
+      },
+      {
+        id: 'msg-8',
+        senderId: 'contact-5',
+        senderName: 'David Lee',
+        senderType: 'client',
+        message: '"Great working with you, Alex! Looking forward to the implementation phase."',
+        timestamp: '11:30 AM',
+        date: 'Feb 20',
+      },
+    ],
+    notes: [
+      {
+        id: 'note-2',
+        authorId: 'user-1',
+        authorName: 'Alex Williams',
+        title: 'Internal Note',
+        content: 'Handoff to implementation team scheduled for next week.',
+        timestamp: '12:00 PM',
+      },
+    ],
+  },
+];
