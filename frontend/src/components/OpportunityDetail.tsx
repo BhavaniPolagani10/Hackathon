@@ -28,10 +28,6 @@ function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
               <Pencil size={16} />
               Edit Opportunity
             </button>
-            <button className="action-btn primary">
-              <FileText size={16} />
-              Generate Document
-            </button>
           </div>
         </div>
 
