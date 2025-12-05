@@ -1,4 +1,3 @@
-import { Plus } from 'lucide-react';
 import { Opportunity } from '../types';
 import './Sidebar.css';
 
@@ -13,9 +12,6 @@ function Sidebar({ opportunities, selectedId, onSelect }: SidebarProps) {
     <aside className="sidebar">
       <div className="sidebar-header">
         <h2 className="sidebar-title">Opportunities</h2>
-        <button className="add-button" aria-label="Add opportunity">
-          <Plus size={18} />
-        </button>
       </div>
       <div className="opportunities-list">
         {opportunities.map((opp) => (

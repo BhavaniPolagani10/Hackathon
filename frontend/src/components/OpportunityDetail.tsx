@@ -1,9 +1,11 @@
 import { Pencil, FileText, FileIcon, Link, FileSpreadsheet, MessageSquare } from 'lucide-react';
 import { Opportunity } from '../types';
 import './OpportunityDetail.css';
+import { useState } from 'react';
 
 interface OpportunityDetailProps {
   opportunity: Opportunity;
+  onUpdate?: (updated: Opportunity) => void;
 }
 
 function formatCurrency(value: number): string {
@@ -14,26 +16,62 @@ function formatCurrency(value: number): string {
   }).format(value);
 }
 
-function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
+function OpportunityDetail({ opportunity, onUpdate }: OpportunityDetailProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [draft, setDraft] = useState<Opportunity>(opportunity);
+
+  function startEdit() {
+    setDraft(opportunity);
+    setIsEditing(true);
+  }
+
+  function cancelEdit() {
+    setDraft(opportunity);
+    setIsEditing(false);
+  }
+
+  function saveEdit() {
+    setIsEditing(false);
+    onUpdate?.(draft);
+  }
+
   return (
-    <div className="opportunity-detail">
+    <div className={`opportunity-detail ${isEditing ? 'editing' : ''}`}>
       <div className="detail-content">
         <div className="detail-header">
           <div className="detail-info">
-            <h1 className="detail-title">{opportunity.name}</h1>
+            <h1 className="detail-title">
+              {!isEditing ? (
+                opportunity.name
+              ) : (
+                <input
+                  value={draft.name}
+                  onChange={(e) => setDraft({ ...draft, name: e.target.value })}
+                />
+              )}
+            </h1>
             <span className="detail-id">Opportunity ID: {opportunity.opportunityId}</span>
           </div>
           <div className="detail-actions">
-            <button className="action-btn secondary">
-              <Pencil size={16} />
-              Edit Opportunity
-            </button>
-            <button className="action-btn primary">
-              <FileText size={16} />
-              Generate Document
-            </button>
+            {!isEditing ? (
+              <button className="action-btn secondary" onClick={startEdit}>
+                <Pencil size={16} />
+                Edit Opportunity
+              </button>
+            ) : (
+              <>
+                <button className="action-btn secondary" onClick={saveEdit}>
+                  Save
+                </button>
+                <button className="action-btn" onClick={cancelEdit}>
+                  Cancel
+                </button>
+              </>
+            )}
           </div>
         </div>
+
+        {/* Description editing removed - description is read-only */}
 
         <section className="items-section">
           <h2 className="section-title">Items</h2>
