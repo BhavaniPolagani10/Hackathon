@@ -1,6 +1,6 @@
 .client-sidebar {
-  width: 220px;
-  min-width: 220px;
+  width: 390px;
+  min-width: 380px;
   background-color: white;
   border-right: 1px solid #e5e7eb;
   display: flex;

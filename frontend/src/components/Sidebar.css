@@ -1,6 +1,6 @@
 .sidebar {
-  width: 280px;
-  min-width: 280px;
+  width: 390px;
+  min-width: 380px;
   background-color: white;
   border-right: 1px solid #e5e7eb;
   display: flex;
@@ -22,24 +22,7 @@
   color: #1f2937;
 }
 
-.add-button {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  cursor: pointer;
-  color: #6b7280;
-  transition: all 0.2s;
-}
-
-.add-button:hover {
-  background-color: #f3f4f6;
-  color: #1f2937;
-}
+/* add-button removed: styles retained in case it's reintroduced later */
 
 .opportunities-list {
   flex: 1;
