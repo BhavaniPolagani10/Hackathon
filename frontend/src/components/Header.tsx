@@ -1,11 +1,35 @@
+import { useState, useRef, useEffect } from 'react';
 import { TrendingUp, ChevronDown } from 'lucide-react';
 import './Header.css';
 
 interface HeaderProps {
   viewType: string;
+  onViewChange: (view: string) => void;
 }
 
-function Header({ viewType }: HeaderProps) {
+const viewOptions = ['Opportunities', 'Clients'];
+
+function Header({ viewType, onViewChange }: HeaderProps) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleViewSelect = (view: string) => {
+    onViewChange(view);
+    setIsDropdownOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="header-left">
@@ -13,9 +37,27 @@ function Header({ viewType }: HeaderProps) {
           <TrendingUp size={24} className="logo-icon" />
           <span className="logo-text">Sales Tracker</span>
         </div>
-        <div className="view-selector">
-          <span>View: {viewType}</span>
-          <ChevronDown size={16} />
+        <div className="view-selector-container" ref={dropdownRef}>
+          <div 
+            className="view-selector"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <span>View: {viewType}</span>
+            <ChevronDown size={16} />
+          </div>
+          {isDropdownOpen && (
+            <div className="view-dropdown">
+              {viewOptions.map((option) => (
+                <div
+                  key={option}
+                  className={`view-dropdown-item ${viewType === option ? 'selected' : ''}`}
+                  onClick={() => handleViewSelect(option)}
+                >
+                  {option}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className="header-right">
