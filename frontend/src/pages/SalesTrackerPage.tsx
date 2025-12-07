@@ -32,7 +32,7 @@ function SalesTrackerPage() {
               onSelect={setSelectedOpportunityId}
             />
             {selectedOpportunity && (
-              <OpportunityDetail opportunity={selectedOpportunity} showSidebar={false} />
+              <OpportunityDetail opportunity={selectedOpportunity} showSidebar={true} />
             )}
           </>
         ) : (

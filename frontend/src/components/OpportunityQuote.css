@@ -1,0 +1,111 @@
+.opportunity-quote {
+  flex: 1;
+  padding: 24px 32px;
+  overflow-y: auto;
+  background-color: #f9fafb;
+}
+
+.quote-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.quote-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.quote-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.quote-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.quote-items-section {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.quote-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.quote-items-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.quote-items-table td {
+  padding: 16px;
+  font-size: 14px;
+  color: #1f2937;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.quote-items-table th.col-quantity,
+.quote-items-table td.col-quantity {
+  text-align: center;
+}
+
+.quote-items-table th.col-price,
+.quote-items-table td.col-price,
+.quote-items-table th.col-total,
+.quote-items-table td.col-total {
+  text-align: right;
+}
+
+.quote-totals-section {
+  margin-left: auto;
+  width: 300px;
+}
+
+.quote-total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.quote-total-label {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.quote-total-value {
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.quote-grand-total {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 12px;
+  margin-top: 8px;
+}
+
+.quote-grand-total .quote-total-label {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.quote-grand-total .quote-total-value {
+  font-weight: 600;
+  color: #3b82f6;
+  font-size: 18px;
+}
