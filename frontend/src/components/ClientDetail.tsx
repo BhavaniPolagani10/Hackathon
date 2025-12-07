@@ -1,19 +1,12 @@
 import { FileIcon, FileText, Link, FileSpreadsheet, MessageSquare, BookOpen } from 'lucide-react';
 import { useState } from 'react';
 import { Client } from '../types';
+import { formatCurrency } from '../utils/formatCurrency';
 import OpportunitySummary from './OpportunitySummary';
 import './ClientDetail.css';
 
 interface ClientDetailProps {
   client: Client;
-}
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-  }).format(value);
 }
 
 function ClientDetail({ client }: ClientDetailProps) {
@@ -23,10 +16,13 @@ function ClientDetail({ client }: ClientDetailProps) {
   const activeOpportunity = client.associatedOpportunities.find(
     opp => opp.stage !== 'Closed - Won'
   ) || client.associatedOpportunities[0];
+  
+  // Only show summary button if there are opportunities
+  const hasOpportunities = client.associatedOpportunities && client.associatedOpportunities.length > 0;
 
   return (
     <div className="client-detail">
-      {showSummary ? (
+      {showSummary && hasOpportunities ? (
         <OpportunitySummary opportunity={activeOpportunity} clientName={client.name} />
       ) : (
       <div className="client-detail-content">
@@ -116,13 +112,15 @@ function ClientDetail({ client }: ClientDetailProps) {
       )}
 
       <aside className="client-detail-sidebar">
-        <button 
-          className={`sidebar-action ${showSummary ? 'active' : ''}`}
-          aria-label="Summary"
-          onClick={() => setShowSummary(!showSummary)}
-        >
-          <BookOpen size={20} />
-        </button>
+        {hasOpportunities && (
+          <button 
+            className={`sidebar-action ${showSummary ? 'active' : ''}`}
+            aria-label="Summary"
+            onClick={() => setShowSummary(!showSummary)}
+          >
+            <BookOpen size={20} />
+          </button>
+        )}
         <button className="sidebar-action" aria-label="Notes">
           <FileIcon size={20} />
         </button>
