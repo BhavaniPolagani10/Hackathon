@@ -1,5 +1,8 @@
-import { Pencil, FileText, FileIcon, Link, FileSpreadsheet, MessageSquare } from 'lucide-react';
+import { useState } from 'react';
+import { Pencil, FileText, FileIcon, Link, FileSpreadsheet, MessageSquare, FileCheck } from 'lucide-react';
 import { Opportunity } from '../types';
+import { formatCurrency } from '../utils/formatCurrency';
+import QuoteView from './QuoteView';
 import './OpportunityDetail.css';
 
 interface OpportunityDetailProps {
@@ -7,15 +10,43 @@ interface OpportunityDetailProps {
   showSidebar?: boolean;
 }
 
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format(value);
-}
-
 function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetailProps) {
+  const [showQuote, setShowQuote] = useState(false);
+
+  if (showQuote) {
+    return (
+      <div className="opportunity-detail">
+        <QuoteView opportunity={opportunity} />
+        {showSidebar && (
+          <aside className="detail-sidebar">
+            <button 
+              className="sidebar-action active" 
+              aria-label="Quote"
+              onClick={() => setShowQuote(!showQuote)}
+            >
+              <FileCheck size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Notes">
+              <FileIcon size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Documents">
+              <FileText size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Links">
+              <Link size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Spreadsheet">
+              <FileSpreadsheet size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Comments">
+              <MessageSquare size={20} />
+            </button>
+          </aside>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="opportunity-detail">
       <div className="detail-content">
@@ -48,8 +79,8 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
                 <tr key={item.id}>
                   <td className="col-item">{item.name}</td>
                   <td className="col-quantity">{item.quantity}</td>
-                  <td className="col-price">{formatCurrency(item.unitPrice)}</td>
-                  <td className="col-total">{formatCurrency(item.total)}</td>
+                  <td className="col-price">{formatCurrency(item.unitPrice, 2)}</td>
+                  <td className="col-total">{formatCurrency(item.total, 2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -58,15 +89,15 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
           <div className="totals-section">
             <div className="total-row">
               <span className="total-label">Subtotal</span>
-              <span className="total-value">{formatCurrency(opportunity.subtotal)}</span>
+              <span className="total-value">{formatCurrency(opportunity.subtotal, 2)}</span>
             </div>
             <div className="total-row">
               <span className="total-label">Tax ({opportunity.taxRate}%)</span>
-              <span className="total-value">{formatCurrency(opportunity.taxAmount)}</span>
+              <span className="total-value">{formatCurrency(opportunity.taxAmount, 2)}</span>
             </div>
             <div className="total-row grand-total">
               <span className="total-label">Grand Total</span>
-              <span className="total-value">{formatCurrency(opportunity.grandTotal)}</span>
+              <span className="total-value">{formatCurrency(opportunity.grandTotal, 2)}</span>
             </div>
           </div>
         </section>
@@ -74,6 +105,13 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
 
       {showSidebar && (
         <aside className="detail-sidebar">
+          <button 
+            className={`sidebar-action ${showQuote ? 'active' : ''}`} 
+            aria-label="Quote"
+            onClick={() => setShowQuote(!showQuote)}
+          >
+            <FileCheck size={20} />
+          </button>
           <button className="sidebar-action" aria-label="Notes">
             <FileIcon size={20} />
           </button>
