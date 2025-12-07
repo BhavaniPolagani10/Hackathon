@@ -4,6 +4,7 @@ import './OpportunityDetail.css';
 
 interface OpportunityDetailProps {
   opportunity: Opportunity;
+  showSidebar?: boolean;
 }
 
 function formatCurrency(value: number): string {
@@ -14,7 +15,7 @@ function formatCurrency(value: number): string {
   }).format(value);
 }
 
-function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
+function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetailProps) {
   return (
     <div className="opportunity-detail">
       <div className="detail-content">
@@ -71,23 +72,25 @@ function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
         </section>
       </div>
 
-      <aside className="detail-sidebar">
-        <button className="sidebar-action" aria-label="Notes">
-          <FileIcon size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Documents">
-          <FileText size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Links">
-          <Link size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Spreadsheet">
-          <FileSpreadsheet size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Comments">
-          <MessageSquare size={20} />
-        </button>
-      </aside>
+      {showSidebar && (
+        <aside className="detail-sidebar">
+          <button className="sidebar-action" aria-label="Notes">
+            <FileIcon size={20} />
+          </button>
+          <button className="sidebar-action" aria-label="Documents">
+            <FileText size={20} />
+          </button>
+          <button className="sidebar-action" aria-label="Links">
+            <Link size={20} />
+          </button>
+          <button className="sidebar-action" aria-label="Spreadsheet">
+            <FileSpreadsheet size={20} />
+          </button>
+          <button className="sidebar-action" aria-label="Comments">
+            <MessageSquare size={20} />
+          </button>
+        </aside>
+      )}
     </div>
   );
 }
