@@ -1,4 +1,4 @@
-import { FileIcon, FileText, Link, FileSpreadsheet, MessageSquare, BookOpen } from 'lucide-react';
+import { MessageSquare, BookOpen } from 'lucide-react';
 import { useState } from 'react';
 import { Client } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -153,18 +153,7 @@ function ClientDetail({ client }: ClientDetailProps) {
             <BookOpen size={20} />
           </button>
         )}
-        <button className="sidebar-action" aria-label="Notes">
-          <FileIcon size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Documents">
-          <FileText size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Links">
-          <Link size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Spreadsheet">
-          <FileSpreadsheet size={20} />
-        </button>
+        {/* Only Summary and Conversations buttons retained per request */}
         <button 
           className={`sidebar-action ${showConversations ? 'active' : ''}`}
           aria-label="Conversations"
