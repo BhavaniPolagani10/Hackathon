@@ -1,20 +1,13 @@
 import { useState } from 'react';
 import { Pencil, FileText, FileIcon, Link, FileSpreadsheet, MessageSquare, FileCheck } from 'lucide-react';
 import { Opportunity } from '../types';
+import { formatCurrency } from '../utils/formatCurrency';
 import QuoteView from './QuoteView';
 import './OpportunityDetail.css';
 
 interface OpportunityDetailProps {
   opportunity: Opportunity;
   showSidebar?: boolean;
-}
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format(value);
 }
 
 function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetailProps) {
@@ -27,7 +20,7 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
         {showSidebar && (
           <aside className="detail-sidebar">
             <button 
-              className={`sidebar-action ${showQuote ? 'active' : ''}`} 
+              className="sidebar-action active" 
               aria-label="Quote"
               onClick={() => setShowQuote(!showQuote)}
             >
@@ -86,8 +79,8 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
                 <tr key={item.id}>
                   <td className="col-item">{item.name}</td>
                   <td className="col-quantity">{item.quantity}</td>
-                  <td className="col-price">{formatCurrency(item.unitPrice)}</td>
-                  <td className="col-total">{formatCurrency(item.total)}</td>
+                  <td className="col-price">{formatCurrency(item.unitPrice, 2)}</td>
+                  <td className="col-total">{formatCurrency(item.total, 2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -96,15 +89,15 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
           <div className="totals-section">
             <div className="total-row">
               <span className="total-label">Subtotal</span>
-              <span className="total-value">{formatCurrency(opportunity.subtotal)}</span>
+              <span className="total-value">{formatCurrency(opportunity.subtotal, 2)}</span>
             </div>
             <div className="total-row">
               <span className="total-label">Tax ({opportunity.taxRate}%)</span>
-              <span className="total-value">{formatCurrency(opportunity.taxAmount)}</span>
+              <span className="total-value">{formatCurrency(opportunity.taxAmount, 2)}</span>
             </div>
             <div className="total-row grand-total">
               <span className="total-label">Grand Total</span>
-              <span className="total-value">{formatCurrency(opportunity.grandTotal)}</span>
+              <span className="total-value">{formatCurrency(opportunity.grandTotal, 2)}</span>
             </div>
           </div>
         </section>
