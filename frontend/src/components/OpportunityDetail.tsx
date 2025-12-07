@@ -1,5 +1,7 @@
-import { Pencil, FileText, FileIcon, Link, FileSpreadsheet, MessageSquare } from 'lucide-react';
+import { useState } from 'react';
+import { Pencil, FileText, FileIcon, Link, FileSpreadsheet, MessageSquare, FileCheck } from 'lucide-react';
 import { Opportunity } from '../types';
+import QuoteView from './QuoteView';
 import './OpportunityDetail.css';
 
 interface OpportunityDetailProps {
@@ -16,6 +18,42 @@ function formatCurrency(value: number): string {
 }
 
 function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetailProps) {
+  const [showQuote, setShowQuote] = useState(false);
+
+  if (showQuote) {
+    return (
+      <div className="opportunity-detail">
+        <QuoteView opportunity={opportunity} />
+        {showSidebar && (
+          <aside className="detail-sidebar">
+            <button 
+              className={`sidebar-action ${showQuote ? 'active' : ''}`} 
+              aria-label="Quote"
+              onClick={() => setShowQuote(!showQuote)}
+            >
+              <FileCheck size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Notes">
+              <FileIcon size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Documents">
+              <FileText size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Links">
+              <Link size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Spreadsheet">
+              <FileSpreadsheet size={20} />
+            </button>
+            <button className="sidebar-action" aria-label="Comments">
+              <MessageSquare size={20} />
+            </button>
+          </aside>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="opportunity-detail">
       <div className="detail-content">
@@ -74,6 +112,13 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
 
       {showSidebar && (
         <aside className="detail-sidebar">
+          <button 
+            className={`sidebar-action ${showQuote ? 'active' : ''}`} 
+            aria-label="Quote"
+            onClick={() => setShowQuote(!showQuote)}
+          >
+            <FileCheck size={20} />
+          </button>
           <button className="sidebar-action" aria-label="Notes">
             <FileIcon size={20} />
           </button>
