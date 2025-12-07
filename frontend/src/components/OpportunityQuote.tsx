@@ -1,16 +1,9 @@
 import { Opportunity } from '../types';
+import { formatCurrency } from '../utils/formatCurrency';
 import './OpportunityQuote.css';
 
 interface OpportunityQuoteProps {
   opportunity: Opportunity;
-}
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-  }).format(value);
 }
 
 function OpportunityQuote({ opportunity }: OpportunityQuoteProps) {
@@ -43,8 +36,8 @@ function OpportunityQuote({ opportunity }: OpportunityQuoteProps) {
               <tr key={item.id}>
                 <td className="col-item">{item.name}</td>
                 <td className="col-quantity">{item.quantity}</td>
-                <td className="col-price">{formatCurrency(item.unitPrice)}</td>
-                <td className="col-total">{formatCurrency(item.total)}</td>
+                <td className="col-price">{formatCurrency(item.unitPrice, 2)}</td>
+                <td className="col-total">{formatCurrency(item.total, 2)}</td>
               </tr>
             ))}
           </tbody>
@@ -53,15 +46,15 @@ function OpportunityQuote({ opportunity }: OpportunityQuoteProps) {
         <div className="quote-totals-section">
           <div className="quote-total-row">
             <span className="quote-total-label">Subtotal:</span>
-            <span className="quote-total-value">{formatCurrency(opportunity.subtotal)}</span>
+            <span className="quote-total-value">{formatCurrency(opportunity.subtotal, 2)}</span>
           </div>
           <div className="quote-total-row">
             <span className="quote-total-label">Tax ({opportunity.taxRate}%):</span>
-            <span className="quote-total-value">{formatCurrency(opportunity.taxAmount)}</span>
+            <span className="quote-total-value">{formatCurrency(opportunity.taxAmount, 2)}</span>
           </div>
           <div className="quote-total-row quote-grand-total">
             <span className="quote-total-label">Grand Total:</span>
-            <span className="quote-total-value">{formatCurrency(opportunity.grandTotal)}</span>
+            <span className="quote-total-value">{formatCurrency(opportunity.grandTotal, 2)}</span>
           </div>
         </div>
       </section>
