@@ -1,4 +1,4 @@
-import { FileIcon, FileText, Link, FileSpreadsheet, MessageSquare, BookOpen } from 'lucide-react';
+import { MessageSquare, BookOpen } from 'lucide-react';
 import { useState } from 'react';
 import { Client } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -43,8 +43,17 @@ function ClientDetail({ client }: ClientDetailProps) {
 
   return (
     <div className="client-detail">
-      {showConversations && conversation ? (
-        <ConversationView conversation={conversation} clientName={client.name} />
+      {showConversations ? (
+        conversation ? (
+          <ConversationView conversation={conversation} clientName={client.name} />
+        ) : (
+          <div className="conversation-empty">
+            <div className="empty-icon">
+              <MessageSquare size={28} />
+            </div>
+            <div className="empty-text">No conversations yet for this client.</div>
+          </div>
+        )
       ) : showSummary && hasOpportunities ? (
         <OpportunitySummary opportunity={activeOpportunity} clientName={client.name} />
       ) : (
@@ -144,27 +153,14 @@ function ClientDetail({ client }: ClientDetailProps) {
             <BookOpen size={20} />
           </button>
         )}
-        <button className="sidebar-action" aria-label="Notes">
-          <FileIcon size={20} />
+        {/* Only Summary and Conversations buttons retained per request */}
+        <button 
+          className={`sidebar-action ${showConversations ? 'active' : ''}`}
+          aria-label="Conversations"
+          onClick={handleConversationToggle}
+        >
+          <MessageSquare size={20} />
         </button>
-        <button className="sidebar-action" aria-label="Documents">
-          <FileText size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Links">
-          <Link size={20} />
-        </button>
-        <button className="sidebar-action" aria-label="Spreadsheet">
-          <FileSpreadsheet size={20} />
-        </button>
-        {conversation && (
-          <button 
-            className={`sidebar-action ${showConversations ? 'active' : ''}`}
-            aria-label="Conversations"
-            onClick={handleConversationToggle}
-          >
-            <MessageSquare size={20} />
-          </button>
-        )}
       </aside>
     </div>
   );
