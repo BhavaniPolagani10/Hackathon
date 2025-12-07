@@ -1,5 +1,7 @@
-import { FileIcon, FileText, Link, FileSpreadsheet, MessageSquare } from 'lucide-react';
+import { FileIcon, FileText, Link, FileSpreadsheet, MessageSquare, BookOpen } from 'lucide-react';
+import { useState } from 'react';
 import { Client } from '../types';
+import OpportunitySummary from './OpportunitySummary';
 import './ClientDetail.css';
 
 interface ClientDetailProps {
@@ -15,8 +17,18 @@ function formatCurrency(value: number): string {
 }
 
 function ClientDetail({ client }: ClientDetailProps) {
+  const [showSummary, setShowSummary] = useState(false);
+  
+  // Get the first active opportunity for the summary view
+  const activeOpportunity = client.associatedOpportunities.find(
+    opp => opp.stage !== 'Closed - Won'
+  ) || client.associatedOpportunities[0];
+
   return (
     <div className="client-detail">
+      {showSummary ? (
+        <OpportunitySummary opportunity={activeOpportunity} clientName={client.name} />
+      ) : (
       <div className="client-detail-content">
         <div className="client-detail-header">
           <div className="client-detail-info">
@@ -101,8 +113,16 @@ function ClientDetail({ client }: ClientDetailProps) {
           </div>
         </section>
       </div>
+      )}
 
       <aside className="client-detail-sidebar">
+        <button 
+          className={`sidebar-action ${showSummary ? 'active' : ''}`}
+          aria-label="Summary"
+          onClick={() => setShowSummary(!showSummary)}
+        >
+          <BookOpen size={20} />
+        </button>
         <button className="sidebar-action" aria-label="Notes">
           <FileIcon size={20} />
         </button>
