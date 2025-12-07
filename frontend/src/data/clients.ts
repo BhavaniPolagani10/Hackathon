@@ -50,6 +50,45 @@ export const clients: Client[] = [
         avatarColor: '#e5e7eb',
       },
     ],
+    conversations: [
+      {
+        id: 'conv-1',
+        opportunityId: 'opp-1',
+        opportunityName: 'Software Upgrade',
+        messages: [
+          {
+            id: 'msg-1',
+            sender: 'Alex Williams (You)',
+            senderType: 'user',
+            content: 'Initial discovery call completed. Client is reviewing the detailed proposal for the new enterprise software suite. Follow up scheduled for next Tuesday.',
+            timestamp: '10:42 AM',
+          },
+          {
+            id: 'msg-2',
+            sender: 'Johnathan Doe (Client)',
+            senderType: 'client',
+            content: 'Hi Alex, the proposal looks great. We have a few questions from our technical team. Can we set up a quick call tomorrow?',
+            timestamp: 'Yesterday, 3:15 PM',
+          },
+          {
+            id: 'msg-3',
+            sender: 'Alex Williams (You)',
+            senderType: 'user',
+            content: 'Of course, Johnathan. I\'ve sent over a calendar invite for 2 PM. Looking forward to it.',
+            timestamp: '9:05 AM',
+          },
+          {
+            id: 'msg-4',
+            sender: 'Alex Williams (You)',
+            senderType: 'user',
+            content: 'Need to prep for the technical questions. Will loop in Sarah from engineering for the 2 PM call.',
+            timestamp: '9:06 AM',
+            isNote: true,
+            noteTitle: 'Internal Note',
+          },
+        ],
+      },
+    ],
   },
   {
     id: '2',

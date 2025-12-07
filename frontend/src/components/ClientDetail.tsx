@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Client } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
 import OpportunitySummary from './OpportunitySummary';
+import ConversationView from './ConversationView';
 import './ClientDetail.css';
 
 interface ClientDetailProps {
@@ -11,6 +12,7 @@ interface ClientDetailProps {
 
 function ClientDetail({ client }: ClientDetailProps) {
   const [showSummary, setShowSummary] = useState(false);
+  const [showConversations, setShowConversations] = useState(false);
   
   // Get the first active opportunity for the summary view
   const activeOpportunity = client.associatedOpportunities.find(
@@ -19,10 +21,31 @@ function ClientDetail({ client }: ClientDetailProps) {
   
   // Only show summary button if there are opportunities
   const hasOpportunities = client.associatedOpportunities && client.associatedOpportunities.length > 0;
+  
+  // Get the first conversation (or find one matching the active opportunity)
+  const conversation = client.conversations && client.conversations.length > 0 
+    ? client.conversations[0] 
+    : null;
+  
+  const handleConversationToggle = () => {
+    setShowConversations(!showConversations);
+    if (!showConversations) {
+      setShowSummary(false); // Hide summary when showing conversations
+    }
+  };
+  
+  const handleSummaryToggle = () => {
+    setShowSummary(!showSummary);
+    if (!showSummary) {
+      setShowConversations(false); // Hide conversations when showing summary
+    }
+  };
 
   return (
     <div className="client-detail">
-      {showSummary && hasOpportunities ? (
+      {showConversations && conversation ? (
+        <ConversationView conversation={conversation} clientName={client.name} />
+      ) : showSummary && hasOpportunities ? (
         <OpportunitySummary opportunity={activeOpportunity} clientName={client.name} />
       ) : (
       <div className="client-detail-content">
@@ -116,7 +139,7 @@ function ClientDetail({ client }: ClientDetailProps) {
           <button 
             className={`sidebar-action ${showSummary ? 'active' : ''}`}
             aria-label="Summary"
-            onClick={() => setShowSummary(!showSummary)}
+            onClick={handleSummaryToggle}
           >
             <BookOpen size={20} />
           </button>
@@ -133,9 +156,15 @@ function ClientDetail({ client }: ClientDetailProps) {
         <button className="sidebar-action" aria-label="Spreadsheet">
           <FileSpreadsheet size={20} />
         </button>
-        <button className="sidebar-action" aria-label="Comments">
-          <MessageSquare size={20} />
-        </button>
+        {conversation && (
+          <button 
+            className={`sidebar-action ${showConversations ? 'active' : ''}`}
+            aria-label="Conversations"
+            onClick={handleConversationToggle}
+          >
+            <MessageSquare size={20} />
+          </button>
+        )}
       </aside>
     </div>
   );

@@ -37,6 +37,23 @@ export interface AssociatedOpportunity {
   signedDate?: string;
 }
 
+export interface Message {
+  id: string;
+  sender: string;
+  senderType: 'user' | 'client';
+  content: string;
+  timestamp: string;
+  isNote?: boolean;
+  noteTitle?: string;
+}
+
+export interface Conversation {
+  id: string;
+  opportunityId: string;
+  opportunityName: string;
+  messages: Message[];
+}
+
 export interface Client {
   id: string;
   name: string;
@@ -49,4 +66,5 @@ export interface Client {
   website: string;
   associatedOpportunities: AssociatedOpportunity[];
   keyContacts: Contact[];
+  conversations?: Conversation[];
 }
