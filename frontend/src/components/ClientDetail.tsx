@@ -32,8 +32,7 @@ function ClientDetail({ client }: ClientDetailProps) {
   
   // Find the matching opportunity from the opportunities data for quote details
   const quoteOpportunity = opportunities.find(opp => 
-    opp.name === activeOpportunity?.name || 
-    (client.name === 'Innovate Corp' && opp.opportunityId === 'OP-2024-001')
+    opp.name === activeOpportunity?.name
   );
   
   const handleConversationToggle = () => {
@@ -74,7 +73,7 @@ function ClientDetail({ client }: ClientDetailProps) {
           </div>
         )
       ) : showQuote && quoteOpportunity ? (
-        <QuoteDetail opportunity={quoteOpportunity} clientName={client.name} />
+        <QuoteDetail opportunity={quoteOpportunity} />
       ) : showSummary && hasOpportunities ? (
         <OpportunitySummary opportunity={activeOpportunity} clientName={client.name} />
       ) : (

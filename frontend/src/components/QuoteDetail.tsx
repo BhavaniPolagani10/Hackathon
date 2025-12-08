@@ -4,7 +4,6 @@ import './QuoteDetail.css';
 
 interface QuoteDetailProps {
   opportunity: Opportunity;
-  clientName: string;
 }
 
 function QuoteDetail({ opportunity }: QuoteDetailProps) {
