@@ -1,0 +1,142 @@
+.quote-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+  overflow: hidden;
+}
+
+.quote-detail-content {
+  flex: 1;
+  padding: 24px 32px;
+  overflow-y: auto;
+}
+
+.quote-detail-header {
+  margin-bottom: 24px;
+}
+
+.quote-detail-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-detail-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.quote-detail-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.items-section {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+
+.items-table thead {
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.items-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  padding: 12px 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.items-table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.items-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.items-table td {
+  padding: 16px;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.col-product {
+  width: 45%;
+}
+
+.col-quantity {
+  width: 15%;
+}
+
+.col-price {
+  width: 20%;
+}
+
+.col-total {
+  width: 20%;
+  text-align: right;
+}
+
+.items-table th.col-total {
+  text-align: right;
+}
+
+.totals-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 2px solid #e5e7eb;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 48px;
+  min-width: 300px;
+}
+
+.total-label {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.total-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: right;
+}
+
+.total-row.grand-total {
+  padding-top: 12px;
+  border-top: 2px solid #e5e7eb;
+  margin-top: 4px;
+}
+
+.total-row.grand-total .total-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.total-row.grand-total .total-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+}
