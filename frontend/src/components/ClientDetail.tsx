@@ -1,9 +1,11 @@
-import { MessageSquare, BookOpen } from 'lucide-react';
+import { MessageSquare, BookOpen, FileText } from 'lucide-react';
 import { useState } from 'react';
 import { Client } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
 import OpportunitySummary from './OpportunitySummary';
 import ConversationView from './ConversationView';
+import QuoteDetail from './QuoteDetail';
+import { opportunities } from '../data/opportunities';
 import './ClientDetail.css';
 
 interface ClientDetailProps {
@@ -13,6 +15,7 @@ interface ClientDetailProps {
 function ClientDetail({ client }: ClientDetailProps) {
   const [showSummary, setShowSummary] = useState(false);
   const [showConversations, setShowConversations] = useState(false);
+  const [showQuote, setShowQuote] = useState(false);
   
   // Get the first active opportunity for the summary view
   const activeOpportunity = client.associatedOpportunities.find(
@@ -27,17 +30,32 @@ function ClientDetail({ client }: ClientDetailProps) {
     ? client.conversations[0] 
     : null;
   
+  // Find the matching opportunity from the opportunities data for quote details
+  const quoteOpportunity = opportunities.find(opp => 
+    opp.name === activeOpportunity?.name
+  );
+  
   const handleConversationToggle = () => {
     setShowConversations(!showConversations);
     if (!showConversations) {
-      setShowSummary(false); // Hide summary when showing conversations
+      setShowSummary(false);
+      setShowQuote(false);
     }
   };
   
   const handleSummaryToggle = () => {
     setShowSummary(!showSummary);
     if (!showSummary) {
-      setShowConversations(false); // Hide conversations when showing summary
+      setShowConversations(false);
+      setShowQuote(false);
+    }
+  };
+  
+  const handleQuoteToggle = () => {
+    setShowQuote(!showQuote);
+    if (!showQuote) {
+      setShowConversations(false);
+      setShowSummary(false);
     }
   };
 
@@ -54,6 +72,8 @@ function ClientDetail({ client }: ClientDetailProps) {
             <div className="empty-text">No conversations yet for this client.</div>
           </div>
         )
+      ) : showQuote && quoteOpportunity ? (
+        <QuoteDetail opportunity={quoteOpportunity} />
       ) : showSummary && hasOpportunities ? (
         <OpportunitySummary opportunity={activeOpportunity} clientName={client.name} />
       ) : (
@@ -153,7 +173,6 @@ function ClientDetail({ client }: ClientDetailProps) {
             <BookOpen size={20} />
           </button>
         )}
-        {/* Only Summary and Conversations buttons retained per request */}
         <button 
           className={`sidebar-action ${showConversations ? 'active' : ''}`}
           aria-label="Conversations"
@@ -161,6 +180,15 @@ function ClientDetail({ client }: ClientDetailProps) {
         >
           <MessageSquare size={20} />
         </button>
+        {hasOpportunities && quoteOpportunity && (
+          <button 
+            className={`sidebar-action ${showQuote ? 'active' : ''}`}
+            aria-label="Quote"
+            onClick={handleQuoteToggle}
+          >
+            <FileText size={20} />
+          </button>
+        )}
       </aside>
     </div>
   );
