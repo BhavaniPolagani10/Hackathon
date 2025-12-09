@@ -211,8 +211,8 @@ psql -U postgres
 CREATE DATABASE heavymachinery_crm;
 CREATE DATABASE heavymachinery_inventory;
 
-# Create user
-CREATE USER hmdealer WITH ENCRYPTED PASSWORD 'YourSecurePassword123!';
+# Create user (replace {YOUR_SECURE_PASSWORD} with a strong password)
+CREATE USER hmdealer WITH ENCRYPTED PASSWORD '{YOUR_SECURE_PASSWORD}';
 
 # Grant privileges
 GRANT ALL PRIVILEGES ON DATABASE heavymachinery_crm TO hmdealer;
@@ -243,7 +243,7 @@ Create `appsettings.Development.json` in each API project:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=heavymachinery_crm;Username=hmdealer;Password=YourSecurePassword123!"
+    "DefaultConnection": "Host=localhost;Database=heavymachinery_crm;Username=hmdealer;Password={YOUR_SECURE_PASSWORD}"
   },
   "Logging": {
     "LogLevel": {
@@ -255,11 +255,13 @@ Create `appsettings.Development.json` in each API project:
 }
 ```
 
+**Note:** Replace `{YOUR_SECURE_PASSWORD}` with your actual database password. For production, use environment variables or Azure Key Vault / AWS Secrets Manager instead of storing passwords in configuration files.
+
 **InventoryService.API/appsettings.Development.json:**
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=heavymachinery_inventory;Username=hmdealer;Password=YourSecurePassword123!"
+    "DefaultConnection": "Host=localhost;Database=heavymachinery_inventory;Username=hmdealer;Password={YOUR_SECURE_PASSWORD}"
   },
   "Logging": {
     "LogLevel": {
@@ -854,7 +856,10 @@ namespace InventoryService.Infrastructure.Data
 
                 entity.HasIndex(e => new { e.ProductId, e.WarehouseId }).IsUnique();
 
-                // Ignore computed property
+                // Note: QuantityAvailable is a computed property (QuantityOnHand - QuantityReserved)
+                // It's calculated in the entity but ignored in EF Core mapping
+                // For better query performance, you can create a computed column in PostgreSQL:
+                // ALTER TABLE inventory ADD COLUMN quantity_available INTEGER GENERATED ALWAYS AS (quantity_on_hand - quantity_reserved) STORED;
                 entity.Ignore(e => e.QuantityAvailable);
             });
 
@@ -1400,7 +1405,7 @@ services:
     image: postgres:15
     environment:
       POSTGRES_USER: hmdealer
-      POSTGRES_PASSWORD: YourSecurePassword123!
+      POSTGRES_PASSWORD: ${DB_PASSWORD}  # Set via environment variable or .env file
       POSTGRES_DB: heavymachinery_crm
     ports:
       - "5432:5432"
@@ -1423,7 +1428,7 @@ services:
       - "5001:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Database=heavymachinery_crm;Username=hmdealer;Password=YourSecurePassword123!
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=heavymachinery_crm;Username=hmdealer;Password=${DB_PASSWORD}
     depends_on:
       - postgres
 
@@ -1435,7 +1440,7 @@ services:
       - "5003:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Database=heavymachinery_inventory;Username=hmdealer;Password=YourSecurePassword123!
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=heavymachinery_inventory;Username=hmdealer;Password=${DB_PASSWORD}
       - ConnectionStrings__RedisConnection=redis:6379
     depends_on:
       - postgres
@@ -1445,6 +1450,15 @@ volumes:
   postgres_data:
   redis_data:
 ```
+
+**Create a `.env` file** in the same directory as docker-compose.yml:
+
+```bash
+# .env file (DO NOT commit this file to version control)
+DB_PASSWORD=YourSecurePasswordHere123!
+```
+
+**Important:** Add `.env` to your `.gitignore` file to prevent committing secrets to version control.
 
 ### 3. Run with Docker Compose
 
@@ -1529,11 +1543,18 @@ kubectl get services
 
 ### 1. Security
 
-- **Never commit secrets**: Use environment variables or secret management services (Azure Key Vault, AWS Secrets Manager)
+- **Never commit secrets**: 
+  - Use environment variables for all passwords and sensitive configuration
+  - Use secret management services (Azure Key Vault, AWS Secrets Manager, HashiCorp Vault)
+  - Add `.env`, `appsettings.*.json` with secrets to `.gitignore`
+  - Throughout this guide, placeholders like `{YOUR_SECURE_PASSWORD}` and `${DB_PASSWORD}` are used
+  - Replace these placeholders with actual secrets only in your local environment or CI/CD pipelines
 - **Enable HTTPS**: Always use TLS in production
 - **Implement authentication**: Use JWT tokens with proper validation
 - **Rate limiting**: Protect APIs from abuse
 - **Input validation**: Validate all user inputs
+- **SQL injection prevention**: Use parameterized queries (Entity Framework does this automatically)
+- **Dependency scanning**: Regularly update NuGet packages and scan for vulnerabilities
 
 ### 2. Performance
 
