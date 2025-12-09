@@ -179,6 +179,32 @@ This documentation suite addresses the 10 critical pain points in heavy machiner
 
 ---
 
+### GitHub Actions Workflows and Agents
+**Location:** [`/doc/WORKFLOW_AND_AGENTS_DESIGN.md`](WORKFLOW_AND_AGENTS_DESIGN.md)
+
+**Target Audience:** DevOps Engineers, Platform Engineers, Engineering Managers
+
+**Contents:**
+- Complete CI/CD pipeline architecture
+- 12 core workflow specifications
+- 10 automation agent designs
+- Security and compliance measures
+- Monitoring and alerting setup
+- Implementation roadmap
+
+**Supporting Documents:**
+- [`WORKFLOW_VISUAL_DIAGRAMS.md`](WORKFLOW_VISUAL_DIAGRAMS.md) - Visual workflow diagrams
+- [`WORKFLOW_QUICK_REFERENCE.md`](WORKFLOW_QUICK_REFERENCE.md) - Quick reference guide
+
+**Use these documents when:**
+- Setting up CI/CD pipelines
+- Configuring automated deployments
+- Understanding workflow dependencies
+- Troubleshooting build/deployment issues
+- Planning DevOps improvements
+
+---
+
 ### Workflow and Process Diagrams
 **Location:** [`/doc/diagrams/WORKFLOW_DIAGRAMS.md`](diagrams/WORKFLOW_DIAGRAMS.md)
 
@@ -268,11 +294,13 @@ This documentation suite addresses the 10 critical pain points in heavy machiner
 5. Read relevant [ADR documents](adr/) for architectural context
 
 ### For DevOps Engineers:
-1. Review [Deployment Architecture](hld/HIGH_LEVEL_DESIGN.md#9-deployment-architecture)
-2. Study [Deployment Diagram](diagrams/C4_DIAGRAMS.md#deployment-diagram)
-3. Read [ADR-001: Microservices](adr/ADR-001-microservices-architecture.md)
-4. Review [Monitoring Strategy](lld/LOW_LEVEL_DESIGN.md#8-monitoring-and-observability)
-5. Check [CI/CD Pipeline](lld/LOW_LEVEL_DESIGN.md#10-deployment-procedures)
+1. Review [GitHub Actions Workflows Design](WORKFLOW_AND_AGENTS_DESIGN.md)
+2. Study [Workflow Visual Diagrams](WORKFLOW_VISUAL_DIAGRAMS.md)
+3. Check [Workflow Quick Reference](WORKFLOW_QUICK_REFERENCE.md)
+4. Review [Deployment Architecture](hld/HIGH_LEVEL_DESIGN.md#9-deployment-architecture)
+5. Study [Deployment Diagram](diagrams/C4_DIAGRAMS.md#deployment-diagram)
+6. Read [ADR-001: Microservices](adr/ADR-001-microservices-architecture.md)
+7. Review [Monitoring Strategy](lld/LOW_LEVEL_DESIGN.md#8-monitoring-and-observability)
 
 ### For QA Engineers:
 1. Read [Workflow Diagrams](diagrams/WORKFLOW_DIAGRAMS.md) for test scenarios
@@ -400,6 +428,9 @@ For questions about this documentation:
 | ADR-006 | 1.0 | 2025-11-24 | Accepted |
 | C4 Diagrams | 1.0 | 2025-11-24 | Draft for Review |
 | Workflow Diagrams | 1.0 | 2025-11-24 | Draft for Review |
+| Workflows & Agents Design | 1.0 | 2025-12-09 | Final |
+| Workflow Visual Diagrams | 1.0 | 2025-12-09 | Final |
+| Workflow Quick Reference | 1.0 | 2025-12-09 | Final |
 
 ---
 
