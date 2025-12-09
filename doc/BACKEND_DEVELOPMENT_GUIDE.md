@@ -660,7 +660,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+
+// Note: Authentication is not configured in this basic setup
+// To add JWT authentication, install Microsoft.AspNetCore.Authentication.JwtBearer
+// and add: app.UseAuthentication(); before app.UseAuthorization();
+// See "Next Steps" section for implementing authentication
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
@@ -1105,7 +1111,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+
+// Note: Authentication is not configured in this basic setup
+// To add JWT authentication, install Microsoft.AspNetCore.Authentication.JwtBearer
+// and add: app.UseAuthentication(); before app.UseAuthorization();
+// See "Next Steps" section for implementing authentication
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
