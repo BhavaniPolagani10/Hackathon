@@ -7,6 +7,13 @@ import random
 class QuoteGenerator:
     """Generate quotes with pricing and calculations"""
     
+    # Configuration constants
+    PRICE_VARIATION_PERCENT = 0.05  # ±5% variation
+    VOLUME_DISCOUNT_TIER1_QTY = 3
+    VOLUME_DISCOUNT_TIER1_RATE = 0.95  # 5% discount
+    VOLUME_DISCOUNT_TIER2_QTY = 5
+    VOLUME_DISCOUNT_TIER2_RATE = 0.90  # 10% discount
+    
     # Mock pricing database
     PRODUCT_PRICING = {
         "excavator": {"base": 250000, "range": (200000, 400000)},
@@ -27,9 +34,10 @@ class QuoteGenerator:
     @classmethod
     def generate_quote_number(cls) -> str:
         """Generate unique quote number"""
+        import uuid
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        random_suffix = random.randint(100, 999)
-        return f"Q-{timestamp}-{random_suffix}"
+        unique_suffix = str(uuid.uuid4())[:8]
+        return f"Q-{timestamp}-{unique_suffix}"
     
     @classmethod
     def calculate_product_price(cls, product_name: str, quantity: int = 1) -> float:
@@ -45,14 +53,14 @@ class QuoteGenerator:
         
         # Base price with some variation
         base_price = pricing["base"]
-        variation = random.uniform(-0.05, 0.05)  # ±5% variation
+        variation = random.uniform(-cls.PRICE_VARIATION_PERCENT, cls.PRICE_VARIATION_PERCENT)
         unit_price = base_price * (1 + variation)
         
         # Volume discount
-        if quantity >= 5:
-            unit_price *= 0.90  # 10% discount for 5+
-        elif quantity >= 3:
-            unit_price *= 0.95  # 5% discount for 3+
+        if quantity >= cls.VOLUME_DISCOUNT_TIER2_QTY:
+            unit_price *= cls.VOLUME_DISCOUNT_TIER2_RATE
+        elif quantity >= cls.VOLUME_DISCOUNT_TIER1_QTY:
+            unit_price *= cls.VOLUME_DISCOUNT_TIER1_RATE
         
         return round(unit_price, 2)
     

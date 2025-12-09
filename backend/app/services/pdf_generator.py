@@ -49,11 +49,19 @@ class PDFGenerator:
         elements.append(Spacer(1, 0.2*inch))
         
         # Quote information
+        # Helper function for valid_until formatting
+        def format_valid_until(valid_until_data):
+            if isinstance(valid_until_data, str):
+                return valid_until_data
+            elif isinstance(valid_until_data, datetime):
+                return valid_until_data.strftime('%B %d, %Y')
+            else:
+                return datetime.now().strftime('%B %d, %Y')
+        
         quote_info_data = [
             ['Quote Number:', quote_data['quote_number']],
             ['Date:', datetime.now().strftime('%B %d, %Y')],
-            ['Valid Until:', quote_data.get('valid_until', 'N/A') if isinstance(quote_data.get('valid_until'), str) 
-             else quote_data.get('valid_until', datetime.now()).strftime('%B %d, %Y')],
+            ['Valid Until:', format_valid_until(quote_data.get('valid_until'))],
             ['Status:', quote_data['status'].upper()],
         ]
         
