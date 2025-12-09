@@ -211,8 +211,8 @@ psql -U postgres
 CREATE DATABASE heavymachinery_crm;
 CREATE DATABASE heavymachinery_inventory;
 
-# Create user (replace {YOUR_SECURE_PASSWORD} with a strong password)
-CREATE USER hmdealer WITH ENCRYPTED PASSWORD '{YOUR_SECURE_PASSWORD}';
+# Create user (replace YOUR_SECURE_PASSWORD_HERE with a strong password)
+CREATE USER hmdealer WITH ENCRYPTED PASSWORD 'YOUR_SECURE_PASSWORD_HERE';
 
 # Grant privileges
 GRANT ALL PRIVILEGES ON DATABASE heavymachinery_crm TO hmdealer;
@@ -243,7 +243,7 @@ Create `appsettings.Development.json` in each API project:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=heavymachinery_crm;Username=hmdealer;Password={YOUR_SECURE_PASSWORD}"
+    "DefaultConnection": "Host=localhost;Database=heavymachinery_crm;Username=hmdealer;Password=YOUR_SECURE_PASSWORD_HERE"
   },
   "Logging": {
     "LogLevel": {
@@ -255,13 +255,13 @@ Create `appsettings.Development.json` in each API project:
 }
 ```
 
-**Note:** Replace `{YOUR_SECURE_PASSWORD}` with your actual database password. For production, use environment variables or Azure Key Vault / AWS Secrets Manager instead of storing passwords in configuration files.
+**Note:** Replace `YOUR_SECURE_PASSWORD_HERE` with your actual database password. For production, use environment variables or Azure Key Vault / AWS Secrets Manager instead of storing passwords in configuration files. Add `appsettings.Development.json` to `.gitignore` if it contains real secrets.
 
 **InventoryService.API/appsettings.Development.json:**
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=heavymachinery_inventory;Username=hmdealer;Password={YOUR_SECURE_PASSWORD}"
+    "DefaultConnection": "Host=localhost;Database=heavymachinery_inventory;Username=hmdealer;Password=YOUR_SECURE_PASSWORD_HERE"
   },
   "Logging": {
     "LogLevel": {
@@ -629,7 +629,7 @@ builder.Services.AddDbContext<QuoteDbContext>(options =>
 // Register application services
 builder.Services.AddScoped<IQuoteService, QuoteApplicationService>();
 
-// Configure CORS
+// Configure CORS (for development only - restrict in production!)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -638,6 +638,15 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
+    
+    // Production CORS policy example (use this in production):
+    // options.AddPolicy("Production", policy =>
+    // {
+    //     policy.WithOrigins("https://yourdomain.com", "https://app.yourdomain.com")
+    //           .WithMethods("GET", "POST", "PUT", "DELETE")
+    //           .WithHeaders("Content-Type", "Authorization")
+    //           .AllowCredentials();
+    // });
 });
 
 var app = builder.Build();
@@ -857,9 +866,15 @@ namespace InventoryService.Infrastructure.Data
                 entity.HasIndex(e => new { e.ProductId, e.WarehouseId }).IsUnique();
 
                 // Note: QuantityAvailable is a computed property (QuantityOnHand - QuantityReserved)
-                // It's calculated in the entity but ignored in EF Core mapping
-                // For better query performance, you can create a computed column in PostgreSQL:
-                // ALTER TABLE inventory ADD COLUMN quantity_available INTEGER GENERATED ALWAYS AS (quantity_on_hand - quantity_reserved) STORED;
+                // We ignore it in EF Core because it's calculated in the entity getter
+                // This means:
+                // 1. You can access it on loaded entities: inventory.QuantityAvailable
+                // 2. You CANNOT use it in LINQ queries: .Where(i => i.QuantityAvailable > 10) won't work
+                // 
+                // For better query performance, create a computed column in PostgreSQL:
+                // ALTER TABLE inventory ADD COLUMN quantity_available INTEGER 
+                //   GENERATED ALWAYS AS (quantity_on_hand - quantity_reserved) STORED;
+                // Then map it: entity.Property(e => e.QuantityAvailable).HasColumnName("quantity_available");
                 entity.Ignore(e => e.QuantityAvailable);
             });
 
@@ -1059,7 +1074,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
 // Register application services
 builder.Services.AddScoped<IInventoryService, InventoryApplicationService>();
 
-// Configure CORS
+// Configure CORS (for development only - restrict in production!)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -1068,6 +1083,15 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
+    
+    // Production CORS policy example (use this in production):
+    // options.AddPolicy("Production", policy =>
+    // {
+    //     policy.WithOrigins("https://yourdomain.com", "https://app.yourdomain.com")
+    //           .WithMethods("GET", "POST", "PUT", "DELETE")
+    //           .WithHeaders("Content-Type", "Authorization")
+    //           .AllowCredentials();
+    // });
 });
 
 var app = builder.Build();
@@ -1455,14 +1479,23 @@ volumes:
 
 ```bash
 # .env file (DO NOT commit this file to version control)
-DB_PASSWORD=YourSecurePasswordHere123!
+# IMPORTANT: Replace CHANGE_THIS_PASSWORD with your actual secure password
+DB_PASSWORD=CHANGE_THIS_PASSWORD
 ```
 
-**Important:** Add `.env` to your `.gitignore` file to prevent committing secrets to version control.
+**Important:** 
+- Add `.env` to your `.gitignore` file to prevent committing secrets to version control
+- Replace `CHANGE_THIS_PASSWORD` with a strong password before running docker-compose
+- Use different passwords for development, staging, and production environments
 
 ### 3. Run with Docker Compose
 
+Before running docker-compose, ensure you've created the `.env` file with your actual password:
+
 ```bash
+# Verify .env file exists
+cat .env
+
 # Build and start all services
 docker-compose up -d
 
