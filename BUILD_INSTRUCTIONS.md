@@ -271,8 +271,8 @@ dotnet run
 ```
 
 The service will start on:
-- HTTP: http://localhost:5002  
-- HTTPS: https://localhost:5003
+- HTTP: http://localhost:5041
+- HTTPS: https://localhost:7220
 
 ### Option 2: Run with Custom Ports
 
@@ -329,18 +329,18 @@ Check that both services are responding:
 
 ```bash
 # Test Quote Service
-curl -k https://localhost:5001/api/quotes
+curl -k https://localhost:7123/api/quotes
 
 # Test Inventory Service
-curl -k https://localhost:5003/api/inventory
+curl -k https://localhost:7220/api/inventory
 ```
 
 ### Step 2: Access Swagger UI
 
 Open your browser and navigate to:
 
-- Quote Service: https://localhost:5001/swagger
-- Inventory Service: https://localhost:5003/swagger
+- Quote Service: https://localhost:7123/swagger
+- Inventory Service: https://localhost:7220/swagger
 
 ### Step 3: Test Quote Service
 
@@ -361,7 +361,7 @@ SELECT customer_id, customer_name FROM crm.crm_customer WHERE customer_code = 'C
 #### Create a Quote via API:
 
 ```bash
-curl -X POST "https://localhost:5001/api/quotes" \
+curl -X POST "https://localhost:7123/api/quotes" \
   -H "Content-Type: application/json" \
   -d '{
     "customerId": 1,
@@ -384,7 +384,7 @@ curl -X POST "https://localhost:5001/api/quotes" \
 #### Retrieve the Quote:
 
 ```bash
-curl -k "https://localhost:5001/api/quotes" | jq
+curl -k "https://localhost:7123/api/quotes" | jq
 ```
 
 ### Step 4: Test Inventory Service
@@ -412,19 +412,19 @@ VALUES (1, 1, 10, 0, 0, NOW(), NOW());
 #### Check Inventory via API:
 
 ```bash
-curl -k "https://localhost:5003/api/inventory" | jq
+curl -k "https://localhost:7220/api/inventory" | jq
 ```
 
 #### Check Product Availability:
 
 ```bash
-curl -k "https://localhost:5003/api/inventory/availability/1" | jq
+curl -k "https://localhost:7220/api/inventory/availability/1" | jq
 ```
 
 #### Reserve Inventory:
 
 ```bash
-curl -X POST "https://localhost:5003/api/inventory/reserve" \
+curl -X POST "https://localhost:7220/api/inventory/reserve" \
   -H "Content-Type: application/json" \
   -d '{
     "productId": 1,

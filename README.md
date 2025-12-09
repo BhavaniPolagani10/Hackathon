@@ -138,9 +138,9 @@ dotnet run
 
 The Quote Service will start on:
 - HTTP: http://localhost:5000
-- HTTPS: https://localhost:5001
+- HTTPS: https://localhost:7123
 
-Swagger UI available at: https://localhost:5001/swagger
+Swagger UI available at: https://localhost:7123/swagger
 
 ### Run Inventory Service
 
@@ -150,10 +150,10 @@ dotnet run
 ```
 
 The Inventory Service will start on:
-- HTTP: http://localhost:5002
-- HTTPS: https://localhost:5003
+- HTTP: http://localhost:5041
+- HTTPS: https://localhost:7220
 
-Swagger UI available at: https://localhost:5003/swagger
+Swagger UI available at: https://localhost:7220/swagger
 
 ### Run Both Services Simultaneously
 
@@ -161,7 +161,7 @@ Open two terminal windows and run each service separately, or use a process mana
 
 ## API Endpoints
 
-### Quote Service (Port 5001)
+### Quote Service (Port 7123)
 
 #### Get All Quotes
 ```bash
@@ -223,7 +223,7 @@ Content-Type: application/json
 DELETE /api/quotes/{id}
 ```
 
-### Inventory Service (Port 5003)
+### Inventory Service (Port 7220)
 
 #### Get All Inventory
 ```bash
@@ -273,8 +273,8 @@ Content-Type: application/json
 ### Using Swagger UI
 
 1. Navigate to the Swagger UI for each service:
-   - Quote Service: https://localhost:5001/swagger
-   - Inventory Service: https://localhost:5003/swagger
+   - Quote Service: https://localhost:7123/swagger
+   - Inventory Service: https://localhost:7220/swagger
 
 2. Use the "Try it out" feature to test endpoints interactively
 
@@ -282,17 +282,17 @@ Content-Type: application/json
 
 **Get all quotes:**
 ```bash
-curl -X GET "https://localhost:5001/api/quotes" -k
+curl -X GET "https://localhost:7123/api/quotes" -k
 ```
 
 **Get inventory availability:**
 ```bash
-curl -X GET "https://localhost:5003/api/inventory/availability/1" -k
+curl -X GET "https://localhost:7220/api/inventory/availability/1" -k
 ```
 
 **Create a quote:**
 ```bash
-curl -X POST "https://localhost:5001/api/quotes" \
+curl -X POST "https://localhost:7123/api/quotes" \
   -H "Content-Type: application/json" \
   -d '{
     "customerId": 1,
