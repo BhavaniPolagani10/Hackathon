@@ -1,10 +1,11 @@
-import { MessageSquare, BookOpen, FileText } from 'lucide-react';
+import { MessageSquare, BookOpen, FileText, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 import { Client } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
 import OpportunitySummary from './OpportunitySummary';
 import ConversationView from './ConversationView';
 import QuoteDetail from './QuoteDetail';
+import OpportunityDetail from './OpportunityDetail';
 import { opportunities } from '../data/opportunities';
 import './ClientDetail.css';
 
@@ -16,6 +17,7 @@ function ClientDetail({ client }: ClientDetailProps) {
   const [showSummary, setShowSummary] = useState(false);
   const [showConversations, setShowConversations] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
+  const [showOpportunity, setShowOpportunity] = useState(false);
   
   // Get the first active opportunity for the summary view
   const activeOpportunity = client.associatedOpportunities.find(
@@ -40,6 +42,7 @@ function ClientDetail({ client }: ClientDetailProps) {
     if (!showConversations) {
       setShowSummary(false);
       setShowQuote(false);
+      setShowOpportunity(false);
     }
   };
   
@@ -48,6 +51,7 @@ function ClientDetail({ client }: ClientDetailProps) {
     if (!showSummary) {
       setShowConversations(false);
       setShowQuote(false);
+      setShowOpportunity(false);
     }
   };
   
@@ -56,6 +60,16 @@ function ClientDetail({ client }: ClientDetailProps) {
     if (!showQuote) {
       setShowConversations(false);
       setShowSummary(false);
+      setShowOpportunity(false);
+    }
+  };
+
+  const handleOpportunityToggle = () => {
+    setShowOpportunity(!showOpportunity);
+    if (!showOpportunity) {
+      setShowConversations(false);
+      setShowSummary(false);
+      setShowQuote(false);
     }
   };
 
@@ -72,6 +86,8 @@ function ClientDetail({ client }: ClientDetailProps) {
             <div className="empty-text">No conversations yet for this client.</div>
           </div>
         )
+      ) : showOpportunity && quoteOpportunity ? (
+        <OpportunityDetail opportunity={quoteOpportunity} showSidebar={false} />
       ) : showQuote && quoteOpportunity ? (
         <QuoteDetail opportunity={quoteOpportunity} />
       ) : showSummary && hasOpportunities ? (
@@ -164,6 +180,15 @@ function ClientDetail({ client }: ClientDetailProps) {
       )}
 
       <aside className="client-detail-sidebar">
+        {hasOpportunities && quoteOpportunity && (
+          <button 
+            className={`sidebar-action ${showOpportunity ? 'active' : ''}`}
+            aria-label="Opportunity"
+            onClick={handleOpportunityToggle}
+          >
+            <TrendingUp size={20} />
+          </button>
+        )}
         {hasOpportunities && (
           <button 
             className={`sidebar-action ${showSummary ? 'active' : ''}`}

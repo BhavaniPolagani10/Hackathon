@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
 import OpportunityDetail from '../components/OpportunityDetail';
 import ClientSidebar from '../components/ClientSidebar';
 import ClientDetail from '../components/ClientDetail';
@@ -56,11 +55,6 @@ function SalesTrackerPage() {
       <div className="page-content">
         {viewType === 'Opportunities' ? (
           <>
-            <Sidebar
-              opportunities={opportunities}
-              selectedId={selectedOpportunityId}
-              onSelect={setSelectedOpportunityId}
-            />
             {selectedOpportunity && (
               <OpportunityDetail opportunity={selectedOpportunity} showSidebar={false} />
             )}

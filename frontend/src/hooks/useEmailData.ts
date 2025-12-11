@@ -20,9 +20,21 @@ export function useEmailData() {
         // Fetch all email threads
         const threads = await emailService.getThreads();
 
-        // Transform threads to opportunities (without quote details for now)
-        const opportunitiesData = threads.map(thread => 
-          transformThreadToOpportunity(thread)
+        // Fetch quotes for threads with quote_generated status
+        const opportunitiesData = await Promise.all(
+          threads.map(async (thread) => {
+            // If thread has quote_generated status and thread_id, try to fetch the quote
+            if ((thread.status === 'quote_generated' || thread.quote_id) && thread.thread_id) {
+              try {
+                const quote = await quoteService.generateQuote(thread.thread_id);
+                return transformThreadToOpportunity(thread, quote);
+              } catch (err) {
+                console.error(`Failed to fetch quote for thread ${thread.thread_id}:`, err);
+                return transformThreadToOpportunity(thread);
+              }
+            }
+            return transformThreadToOpportunity(thread);
+          })
         );
 
         setOpportunities(opportunitiesData);
