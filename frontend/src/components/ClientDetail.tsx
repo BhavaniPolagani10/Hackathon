@@ -1,4 +1,4 @@
-import { MessageSquare, BookOpen, FileText } from 'lucide-react';
+import { MessageSquare, BookOpen, FileText, Briefcase } from 'lucide-react';
 import { useState } from 'react';
 import { Client } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -106,7 +106,6 @@ function ClientDetail({ client }: ClientDetailProps) {
               </a>
             </div>
           </section>
-
           <section className="opportunities-section">
             <h2 className="section-title">Associated Opportunities</h2>
             
@@ -180,15 +179,13 @@ function ClientDetail({ client }: ClientDetailProps) {
         >
           <MessageSquare size={20} />
         </button>
-        {hasOpportunities && quoteOpportunity && (
-          <button 
-            className={`sidebar-action ${showQuote ? 'active' : ''}`}
-            aria-label="Quote"
-            onClick={handleQuoteToggle}
-          >
-            <FileText size={20} />
-          </button>
-        )}
+        <button 
+          className={`sidebar-action ${showQuote ? 'active' : ''}`}
+          aria-label="Quote"
+          onClick={handleQuoteToggle}
+        >
+          <FileText size={20} />
+        </button>
       </aside>
     </div>
   );
