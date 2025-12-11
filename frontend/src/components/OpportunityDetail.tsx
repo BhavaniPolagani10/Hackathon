@@ -19,6 +19,7 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
   return (
     <div className="opportunity-detail">
       
+      
       <div className="detail-content">
         <div className="detail-header">
           <div className="detail-info">
