@@ -1,4 +1,4 @@
-import { MessageSquare, BookOpen, FileText, Briefcase } from 'lucide-react';
+import { MessageSquare, BookOpen, FileText } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Client, Opportunity } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -41,25 +41,30 @@ function ClientDetail({ client }: ClientDetailProps) {
         setOpportunityError(null);
         
         try {
-          // Extract opportunity ID from the name or use a mapping
-          // For now, we'll try to match by name to get the opportunity number
-          // In a real scenario, the client data should include the opportunity number
-          const oppIdMatch = activeOpportunity.name.match(/OP-\d{4}-\d{3}/);
-          const opportunityNumber = oppIdMatch ? oppIdMatch[0] : null;
+          // Map frontend opportunity names to database opportunity numbers
+          // This mapping connects the frontend mock data to real database opportunities
+          const opportunityMapping: Record<string, string> = {
+            'Innovate Corp Software Upgrade': 'OPP-001',
+            'Q3 Infrastructure Overhaul': 'OPP-002',
+            'Global Tech Expansion': 'OPP-003',
+            // Add more mappings as needed from the CRM database
+          };
+          
+          const opportunityNumber = opportunityMapping[activeOpportunity.name];
           
           if (opportunityNumber) {
             const details = await opportunityService.getOpportunityDetails(opportunityNumber);
             setQuoteOpportunity(details);
           } else {
             // Fallback: create a basic opportunity object from available data
-            console.warn('Opportunity number not found in name, using basic data');
+            console.warn(`No opportunity mapping found for: ${activeOpportunity.name}`);
             setQuoteOpportunity({
               id: activeOpportunity.id,
               opportunityId: activeOpportunity.id,
               name: activeOpportunity.name,
               status: activeOpportunity.stage,
               statusColor: '#3498db',
-              description: '',
+              description: 'Details not available from backend',
               timestamp: '',
               items: [],
               subtotal: activeOpportunity.value,
@@ -70,7 +75,7 @@ function ClientDetail({ client }: ClientDetailProps) {
           }
         } catch (error) {
           console.error('Failed to fetch opportunity details:', error);
-          setOpportunityError('Failed to load opportunity details');
+          setOpportunityError('Failed to load opportunity details from backend');
           // Fallback to basic data
           setQuoteOpportunity({
             id: activeOpportunity.id,
@@ -78,7 +83,7 @@ function ClientDetail({ client }: ClientDetailProps) {
             name: activeOpportunity.name,
             status: activeOpportunity.stage,
             statusColor: '#3498db',
-            description: '',
+            description: 'Error loading details',
             timestamp: '',
             items: [],
             subtotal: activeOpportunity.value,
