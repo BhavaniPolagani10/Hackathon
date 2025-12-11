@@ -1,6 +1,7 @@
 import { Pencil, FileText, FileIcon, Link, FileSpreadsheet, MessageSquare, Quote } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Opportunity } from '../types';
+import { QuoteLineItem } from '../types/backend';
 import { useQuoteGeneration } from '../hooks/useEmailData';
 import './OpportunityDetail.css';
 
@@ -19,8 +20,8 @@ function formatCurrency(value: number): string {
 
 function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetailProps) {
   const [showQuote, setShowQuote] = useState(false);
-  const threadId = Number(opportunity.id);
-  const { quote, loading, error, generateQuote } = useQuoteGeneration(threadId || null);
+  const threadId = opportunity.id ? Number(opportunity.id) : null;
+  const { quote, loading, error, generateQuote } = useQuoteGeneration(threadId);
 
   // Generate quote when the quote icon is clicked
   useEffect(() => {
@@ -79,7 +80,7 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
                 </tr>
               </thead>
               <tbody>
-                {quote.line_items.map((item: any) => (
+                {quote.line_items.map((item: QuoteLineItem) => (
                   <tr key={item.line_number}>
                     <td className="col-item">{item.product_name}</td>
                     <td className="col-quantity">{item.quantity}</td>
@@ -96,7 +97,7 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
                 <span className="total-value">{formatCurrency(Number(quote.subtotal))}</span>
               </div>
               <div className="total-row">
-                <span className="total-label">Tax ({Number(quote.tax_rate)}%)</span>
+                <span className="total-label">Tax ({Number(quote.tax_rate).toFixed(1)}%)</span>
                 <span className="total-value">{formatCurrency(Number(quote.tax_amount))}</span>
               </div>
               {quote.shipping_amount > 0 && (
