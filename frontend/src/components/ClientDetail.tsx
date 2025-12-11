@@ -1,11 +1,12 @@
-import { MessageSquare, BookOpen, FileText, Briefcase } from 'lucide-react';
-import { useState } from 'react';
-import { Client } from '../types';
+import { MessageSquare, BookOpen, FileText } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Client, Opportunity } from '../types';
 import { formatCurrency } from '../utils/formatCurrency';
 import OpportunitySummary from './OpportunitySummary';
 import ConversationView from './ConversationView';
 import QuoteDetail from './QuoteDetail';
-import { opportunities } from '../data/opportunities';
+import { opportunityService } from '../services';
+import { OPPORTUNITY_NAME_MAPPING, createFallbackOpportunity } from '../config/opportunityConfig';
 import './ClientDetail.css';
 
 interface ClientDetailProps {
@@ -16,6 +17,9 @@ function ClientDetail({ client }: ClientDetailProps) {
   const [showSummary, setShowSummary] = useState(false);
   const [showConversations, setShowConversations] = useState(false);
   const [showQuote, setShowQuote] = useState(false);
+  const [quoteOpportunity, setQuoteOpportunity] = useState<Opportunity | null>(null);
+  const [loadingOpportunity, setLoadingOpportunity] = useState(false);
+  const [opportunityError, setOpportunityError] = useState<string | null>(null);
   
   // Get the first active opportunity for the summary view
   const activeOpportunity = client.associatedOpportunities.find(
@@ -30,10 +34,44 @@ function ClientDetail({ client }: ClientDetailProps) {
     ? client.conversations[0] 
     : null;
   
-  // Find the matching opportunity from the opportunities data for quote details
-  const quoteOpportunity = opportunities.find(opp => 
-    opp.name === activeOpportunity?.name
-  );
+  // Fetch opportunity details when quote view is shown
+  useEffect(() => {
+    const fetchOpportunityDetails = async () => {
+      if (showQuote && activeOpportunity) {
+        setLoadingOpportunity(true);
+        setOpportunityError(null);
+        
+        try {
+          // Map frontend opportunity name to backend opportunity number
+          const opportunityNumber = OPPORTUNITY_NAME_MAPPING[activeOpportunity.name];
+          
+          if (opportunityNumber) {
+            const details = await opportunityService.getOpportunityDetails(opportunityNumber);
+            setQuoteOpportunity(details);
+          } else {
+            // Fallback: create a basic opportunity object from available data
+            console.warn(`No opportunity mapping found for: ${activeOpportunity.name}`);
+            setQuoteOpportunity(createFallbackOpportunity(
+              activeOpportunity,
+              'Details not available from backend'
+            ));
+          }
+        } catch (error) {
+          console.error('Failed to fetch opportunity details:', error);
+          setOpportunityError('Failed to load opportunity details from backend');
+          // Fallback to basic data
+          setQuoteOpportunity(createFallbackOpportunity(
+            activeOpportunity,
+            'Error loading details'
+          ));
+        } finally {
+          setLoadingOpportunity(false);
+        }
+      }
+    };
+    
+    fetchOpportunityDetails();
+  }, [showQuote, activeOpportunity]);
   
   const handleConversationToggle = () => {
     setShowConversations(!showConversations);
@@ -72,8 +110,19 @@ function ClientDetail({ client }: ClientDetailProps) {
             <div className="empty-text">No conversations yet for this client.</div>
           </div>
         )
-      ) : showQuote && quoteOpportunity ? (
-        <QuoteDetail opportunity={quoteOpportunity} />
+      ) : showQuote ? (
+        loadingOpportunity ? (
+          <div className="loading-state">
+            <div className="loading-spinner"></div>
+            <div className="loading-text">Loading opportunity details...</div>
+          </div>
+        ) : opportunityError && !quoteOpportunity ? (
+          <div className="error-state">
+            <div className="error-text">{opportunityError}</div>
+          </div>
+        ) : quoteOpportunity ? (
+          <QuoteDetail opportunity={quoteOpportunity} />
+        ) : null
       ) : showSummary && hasOpportunities ? (
         <OpportunitySummary opportunity={activeOpportunity} clientName={client.name} />
       ) : (
