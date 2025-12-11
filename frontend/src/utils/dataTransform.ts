@@ -28,9 +28,11 @@ export function transformThreadToOpportunity(thread: EmailThread, quote?: QuoteW
 
   const statusInfo = statusMap[thread.status] || { status: 'Open', color: '#95a5a6' };
 
+  const threadId = thread.thread_id ?? 0;
+  
   return {
-    id: String(thread.thread_id),
-    opportunityId: quote?.quote_number || `OP-${thread.thread_id}`,
+    id: String(threadId),
+    opportunityId: quote?.quote_number || `OP-${threadId}`,
     name: thread.subject,
     status: statusInfo.status,
     statusColor: statusInfo.color,
@@ -53,10 +55,10 @@ export function transformThreadToClient(thread: EmailThreadWithMessages): Client
   }
 
   // Generate abbreviation from customer name
-  const nameParts = thread.customer_name.split(' ');
+  const nameParts = thread.customer_name?.split(' ') || ['Unknown'];
   const abbreviation = nameParts.length > 1
-    ? nameParts[0][0] + nameParts[nameParts.length - 1][0]
-    : thread.customer_name.substring(0, 2);
+    ? (nameParts[0]?.[0] || 'U') + (nameParts[nameParts.length - 1]?.[0] || 'N')
+    : thread.customer_name?.substring(0, 2) || 'UN';
 
   // Transform messages to conversation format
   const messages: Message[] = thread.messages.map((msg, idx) => ({
@@ -70,14 +72,14 @@ export function transformThreadToClient(thread: EmailThreadWithMessages): Client
   }));
 
   const conversation: Conversation = {
-    id: `conv-${thread.thread_id}`,
-    opportunityId: `opp-${thread.thread_id}`,
+    id: `conv-${thread.thread_id || 0}`,
+    opportunityId: `opp-${thread.thread_id || 0}`,
     opportunityName: thread.subject,
     messages,
   };
 
   return {
-    id: String(thread.thread_id),
+    id: String(thread.thread_id || 0),
     name: thread.customer_name,
     abbreviation: abbreviation.toUpperCase(),
     abbreviationColor: '#3b82f6',
@@ -85,16 +87,16 @@ export function transformThreadToClient(thread: EmailThreadWithMessages): Client
     opportunityLabel: 'Active Opportunity',
     industry: 'Unknown',
     location: 'Unknown',
-    website: thread.customer_email.split('@')[1] || '',
+    website: thread.customer_email?.split('@')[1] || '',
     associatedOpportunities: [{
-      id: `opp-${thread.thread_id}`,
+      id: `opp-${thread.thread_id || 0}`,
       name: thread.subject,
       stage: thread.status === 'closed' ? 'Closed - Won' : 'Proposal',
       value: 0,
       probability: 50,
     }],
     keyContacts: [{
-      id: `contact-${thread.thread_id}`,
+      id: `contact-${thread.thread_id || 0}`,
       name: thread.customer_name,
       title: 'Contact',
       avatarColor: '#e5e7eb',

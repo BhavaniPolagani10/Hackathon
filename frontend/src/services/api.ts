@@ -20,8 +20,17 @@ export async function fetchApi<T>(endpoint: string, options?: RequestInit): Prom
   });
 
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
-    throw new ApiError(response.status, errorData.detail || 'Request failed');
+    let errorMessage = 'Request failed';
+    try {
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        const errorData = await response.json();
+        errorMessage = errorData.detail || errorMessage;
+      }
+    } catch {
+      // If parsing fails, use default error message
+    }
+    throw new ApiError(response.status, errorMessage);
   }
 
   return response.json();

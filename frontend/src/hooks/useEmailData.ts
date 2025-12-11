@@ -30,14 +30,16 @@ export function useEmailData() {
         // Fetch detailed thread data with messages for clients view
         const clientsData: Client[] = [];
         for (const thread of threads.slice(0, 5)) { // Limit to first 5 for performance
-          try {
-            const threadWithMessages = await emailService.getThread(thread.thread_id!);
-            const client = transformThreadToClient(threadWithMessages);
-            if (client) {
-              clientsData.push(client);
+          if (thread.thread_id) {
+            try {
+              const threadWithMessages = await emailService.getThread(thread.thread_id);
+              const client = transformThreadToClient(threadWithMessages);
+              if (client) {
+                clientsData.push(client);
+              }
+            } catch (err) {
+              console.error(`Failed to fetch thread ${thread.thread_id}:`, err);
             }
-          } catch (err) {
-            console.error(`Failed to fetch thread ${thread.thread_id}:`, err);
           }
         }
 

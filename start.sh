@@ -63,7 +63,14 @@ trap cleanup SIGINT SIGTERM
 echo -e "${GREEN}Starting backend on http://localhost:8000${NC}"
 cd backend
 source venv/bin/activate
-python -m app.main > ../backend.log 2>&1 &
+
+# Check if app.main module exists
+if ! python -c "import app.main" 2>/dev/null; then
+    echo -e "${RED}Error: Backend module not found. Please ensure dependencies are installed.${NC}"
+    exit 1
+fi
+
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 > ../backend.log 2>&1 &
 BACKEND_PID=$!
 cd ..
 
