@@ -35,8 +35,8 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
       try {
         // For demo purposes, using a mock thread_id
         // In production, this would come from the opportunity data
-        const threadId = 1; // This should be dynamic based on the opportunity
-        const quote = await quoteService.generateQuote(threadId);
+        const DEMO_THREAD_ID = 1; // This should be dynamic based on the opportunity
+        const quote = await quoteService.generateQuote(DEMO_THREAD_ID);
         setQuoteData(quote);
       } catch (error) {
         console.error('Error fetching quote:', error);
@@ -127,8 +127,8 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
                           )}
                         </td>
                         <td className="col-quantity">{item.quantity}</td>
-                        <td className="col-price">${item.unit_price.toFixed(2)}</td>
-                        <td className="col-total">${item.line_total.toFixed(2)}</td>
+                        <td className="col-price">{formatCurrency(item.unit_price)}</td>
+                        <td className="col-total">{formatCurrency(item.line_total)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -137,15 +137,15 @@ function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetai
                 <div className="totals-section">
                   <div className="total-row">
                     <span className="total-label">Subtotal</span>
-                    <span className="total-value">${quoteData.subtotal.toFixed(2)}</span>
+                    <span className="total-value">{formatCurrency(quoteData.subtotal)}</span>
                   </div>
                   <div className="total-row">
                     <span className="total-label">Tax ({quoteData.tax_rate}%)</span>
-                    <span className="total-value">${quoteData.tax_amount.toFixed(2)}</span>
+                    <span className="total-value">{formatCurrency(quoteData.tax_amount)}</span>
                   </div>
                   <div className="total-row grand-total">
                     <span className="total-label">Grand Total</span>
-                    <span className="total-value">${quoteData.total_amount.toFixed(2)}</span>
+                    <span className="total-value">{formatCurrency(quoteData.total_amount)}</span>
                   </div>
                 </div>
               </section>
