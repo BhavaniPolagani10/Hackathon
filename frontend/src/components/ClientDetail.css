@@ -259,3 +259,43 @@
 .conversation-empty .empty-text {
   font-size: 14px;
 }
+
+.loading-state,
+.error-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.error-state {
+  color: #dc2626;
+}
+
+.error-text {
+  font-size: 14px;
+  font-weight: 500;
+}
