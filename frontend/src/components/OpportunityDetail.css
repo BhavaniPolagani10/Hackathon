@@ -209,3 +209,52 @@
   background-color: #f3f4f6;
   color: #1f2937;
 }
+
+.sidebar-action.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.quote-info {
+  margin-bottom: 20px;
+}
+
+.quote-header-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.info-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.quote-loading {
+  text-align: center;
+  padding: 40px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.quote-error {
+  text-align: center;
+  padding: 40px;
+  color: #ef4444;
+  font-size: 16px;
+}
