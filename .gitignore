@@ -1,0 +1,4 @@
+# Root level gitignore
+*.log
+.env
+.DS_Store
