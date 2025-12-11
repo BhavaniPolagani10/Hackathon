@@ -18,6 +18,7 @@ function formatCurrency(value: number): string {
 function OpportunityDetail({ opportunity, showSidebar = true }: OpportunityDetailProps) {
   return (
     <div className="opportunity-detail">
+      
       <div className="detail-content">
         <div className="detail-header">
           <div className="detail-info">
