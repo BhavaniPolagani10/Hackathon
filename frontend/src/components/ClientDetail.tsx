@@ -6,6 +6,7 @@ import OpportunitySummary from './OpportunitySummary';
 import ConversationView from './ConversationView';
 import QuoteDetail from './QuoteDetail';
 import { opportunityService } from '../services';
+import { OPPORTUNITY_NAME_MAPPING, createFallbackOpportunity } from '../config/opportunityConfig';
 import './ClientDetail.css';
 
 interface ClientDetailProps {
@@ -41,16 +42,8 @@ function ClientDetail({ client }: ClientDetailProps) {
         setOpportunityError(null);
         
         try {
-          // Map frontend opportunity names to database opportunity numbers
-          // This mapping connects the frontend mock data to real database opportunities
-          const opportunityMapping: Record<string, string> = {
-            'Innovate Corp Software Upgrade': 'OPP-001',
-            'Q3 Infrastructure Overhaul': 'OPP-002',
-            'Global Tech Expansion': 'OPP-003',
-            // Add more mappings as needed from the CRM database
-          };
-          
-          const opportunityNumber = opportunityMapping[activeOpportunity.name];
+          // Map frontend opportunity name to backend opportunity number
+          const opportunityNumber = OPPORTUNITY_NAME_MAPPING[activeOpportunity.name];
           
           if (opportunityNumber) {
             const details = await opportunityService.getOpportunityDetails(opportunityNumber);
@@ -58,39 +51,19 @@ function ClientDetail({ client }: ClientDetailProps) {
           } else {
             // Fallback: create a basic opportunity object from available data
             console.warn(`No opportunity mapping found for: ${activeOpportunity.name}`);
-            setQuoteOpportunity({
-              id: activeOpportunity.id,
-              opportunityId: activeOpportunity.id,
-              name: activeOpportunity.name,
-              status: activeOpportunity.stage,
-              statusColor: '#3498db',
-              description: 'Details not available from backend',
-              timestamp: '',
-              items: [],
-              subtotal: activeOpportunity.value,
-              taxRate: 8.5,
-              taxAmount: activeOpportunity.value * 0.085,
-              grandTotal: activeOpportunity.value * 1.085,
-            });
+            setQuoteOpportunity(createFallbackOpportunity(
+              activeOpportunity,
+              'Details not available from backend'
+            ));
           }
         } catch (error) {
           console.error('Failed to fetch opportunity details:', error);
           setOpportunityError('Failed to load opportunity details from backend');
           // Fallback to basic data
-          setQuoteOpportunity({
-            id: activeOpportunity.id,
-            opportunityId: activeOpportunity.id,
-            name: activeOpportunity.name,
-            status: activeOpportunity.stage,
-            statusColor: '#3498db',
-            description: 'Error loading details',
-            timestamp: '',
-            items: [],
-            subtotal: activeOpportunity.value,
-            taxRate: 8.5,
-            taxAmount: activeOpportunity.value * 0.085,
-            grandTotal: activeOpportunity.value * 1.085,
-          });
+          setQuoteOpportunity(createFallbackOpportunity(
+            activeOpportunity,
+            'Error loading details'
+          ));
         } finally {
           setLoadingOpportunity(false);
         }

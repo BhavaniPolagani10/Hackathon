@@ -4,10 +4,9 @@ Opportunity API endpoints
 import logging
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from typing import List, Optional
-from decimal import Decimal
 
-from app.models import ProductPricing
 from app.utils import get_db
 
 logger = logging.getLogger(__name__)
