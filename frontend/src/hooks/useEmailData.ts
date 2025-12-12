@@ -21,22 +21,29 @@ export function useEmailData() {
         const threads = await emailService.getThreads();
 
         // Transform threads to opportunities with quote data
-        const opportunitiesData: Opportunity[] = [];
-        for (const thread of threads) {
+        // Fetch quotes in parallel for better performance
+        const quotePromises = threads.map(thread => {
+          if (thread.status === 'quote_generated' && thread.thread_id) {
+            return quoteService.generateQuote(thread.thread_id);
+          }
+          return Promise.resolve(undefined);
+        });
+
+        const quoteResults = await Promise.allSettled(quotePromises);
+        
+        // Transform threads to opportunities with their respective quotes
+        const opportunitiesData: Opportunity[] = threads.map((thread, index) => {
+          const quoteResult = quoteResults[index];
           let quote = undefined;
           
-          // Fetch quote if thread has a generated quote
-          if (thread.status === 'quote_generated' && thread.thread_id) {
-            try {
-              quote = await quoteService.generateQuote(thread.thread_id);
-            } catch (err) {
-              console.error(`Failed to fetch quote for thread ${thread.thread_id}:`, err);
-            }
+          if (quoteResult.status === 'fulfilled') {
+            quote = quoteResult.value;
+          } else if (quoteResult.status === 'rejected') {
+            console.error(`Failed to fetch quote for thread ${thread.thread_id}:`, quoteResult.reason);
           }
           
-          const opportunity = transformThreadToOpportunity(thread, quote);
-          opportunitiesData.push(opportunity);
-        }
+          return transformThreadToOpportunity(thread, quote);
+        });
 
         setOpportunities(opportunitiesData);
 
