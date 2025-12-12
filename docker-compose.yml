@@ -1,0 +1,163 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14-alpine
+    container_name: hackathon-postgres
+    environment:
+      POSTGRES_DB: hackathon_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - hackathon-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend FastAPI Application
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hackathon-backend
+    environment:
+      # Database configuration
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: hackathon_db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      
+      # Azure OpenAI configuration (set your own values)
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY}
+      AZURE_OPENAI_DEPLOYMENT_NAME: ${AZURE_OPENAI_DEPLOYMENT_NAME:-gpt-4o}
+      
+      # CORS configuration
+      ALLOWED_ORIGINS: http://localhost:3000,http://localhost:5555,http://conductor-ui:5000
+      
+      # Application settings
+      APP_ENV: production
+      DEBUG: "false"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - hackathon-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - ./backend:/app
+      - backend_pdfs:/app/pdfs
+
+  # Elasticsearch for Conductor
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    container_name: conductor-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1024m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - hackathon-network
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Redis for Conductor
+  redis:
+    image: redis:7-alpine
+    container_name: conductor-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - hackathon-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Netflix Conductor Server
+  conductor-server:
+    image: conductoross/conductor-server:latest
+    container_name: conductor-server
+    environment:
+      - CONFIG_PROP=config-redis.properties
+    ports:
+      - "8080:8080"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - hackathon-network
+    volumes:
+      - ./conductor/workflows:/app/workflows
+      - ./conductor/tasks:/app/tasks
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Conductor UI
+  conductor-ui:
+    image: conductoross/conductor-ui:latest
+    container_name: conductor-ui
+    environment:
+      - WF_SERVER=http://conductor-server:8080/api
+    ports:
+      - "5555:5000"
+    depends_on:
+      - conductor-server
+    networks:
+      - hackathon-network
+
+  # Frontend React Application (Optional)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hackathon-frontend
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - hackathon-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+networks:
+  hackathon-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  elasticsearch_data:
+  backend_pdfs:

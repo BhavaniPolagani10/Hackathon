@@ -1,0 +1,22 @@
+{
+  "name": "summarize_with_openai",
+  "description": "Task to summarize email thread using Azure OpenAI GPT-4o",
+  "retryCount": 3,
+  "retryLogic": "EXPONENTIAL_BACKOFF",
+  "retryDelaySeconds": 30,
+  "timeoutSeconds": 120,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 90,
+  "inputKeys": [
+    "thread_id",
+    "http_request"
+  ],
+  "outputKeys": [
+    "response",
+    "summary",
+    "products",
+    "urgency",
+    "shipping_address"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

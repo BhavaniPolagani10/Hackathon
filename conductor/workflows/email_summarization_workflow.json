@@ -1,0 +1,95 @@
+{
+  "name": "email_summarization_workflow",
+  "description": "Workflow to summarize email conversations using Azure OpenAI GPT-4o",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "fetch_email_thread",
+      "taskReferenceName": "fetch_email_thread_ref",
+      "type": "SIMPLE",
+      "description": "Fetch email thread from database",
+      "inputParameters": {
+        "thread_id": "${workflow.input.thread_id}",
+        "http_request": {
+          "uri": "http://backend:8000/api/v1/emails/${workflow.input.thread_id}",
+          "method": "GET",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    },
+    {
+      "name": "validate_email_thread",
+      "taskReferenceName": "validate_email_thread_ref",
+      "type": "SWITCH",
+      "description": "Validate that email thread was fetched successfully",
+      "inputParameters": {
+        "switchCaseValue": "${fetch_email_thread_ref.output.response.status}"
+      },
+      "decisionCases": {
+        "200": [
+          {
+            "name": "extract_messages",
+            "taskReferenceName": "extract_messages_ref",
+            "type": "SIMPLE",
+            "description": "Extract messages from email thread",
+            "inputParameters": {
+              "messages": "${fetch_email_thread_ref.output.response.body.messages}",
+              "thread_id": "${workflow.input.thread_id}"
+            }
+          },
+          {
+            "name": "summarize_with_openai",
+            "taskReferenceName": "summarize_with_openai_ref",
+            "type": "SIMPLE",
+            "description": "Summarize email thread using Azure OpenAI",
+            "inputParameters": {
+              "thread_id": "${workflow.input.thread_id}",
+              "http_request": {
+                "uri": "http://backend:8000/api/v1/emails/${workflow.input.thread_id}/summarize",
+                "method": "POST",
+                "headers": {
+                  "Content-Type": "application/json"
+                }
+              }
+            }
+          },
+          {
+            "name": "store_summary",
+            "taskReferenceName": "store_summary_ref",
+            "type": "SIMPLE",
+            "description": "Store summary results",
+            "inputParameters": {
+              "summary": "${summarize_with_openai_ref.output.response.body}",
+              "thread_id": "${workflow.input.thread_id}"
+            }
+          }
+        ]
+      },
+      "defaultCase": [
+        {
+          "name": "handle_error",
+          "taskReferenceName": "handle_error_ref",
+          "type": "SIMPLE",
+          "description": "Handle error when email thread not found",
+          "inputParameters": {
+            "error": "Email thread not found",
+            "thread_id": "${workflow.input.thread_id}"
+          }
+        }
+      ]
+    }
+  ],
+  "outputParameters": {
+    "summary": "${summarize_with_openai_ref.output.response.body}",
+    "thread_id": "${workflow.input.thread_id}",
+    "status": "completed"
+  },
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": false,
+  "ownerEmail": "hackathon@example.com",
+  "timeoutPolicy": "ALERT_ONLY",
+  "timeoutSeconds": 300
+}

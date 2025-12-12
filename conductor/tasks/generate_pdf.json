@@ -1,0 +1,21 @@
+{
+  "name": "generate_pdf",
+  "description": "Task to generate PDF version of the quote",
+  "retryCount": 3,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 10,
+  "timeoutSeconds": 90,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 60,
+  "inputKeys": [
+    "quote_number",
+    "thread_id",
+    "http_request"
+  ],
+  "outputKeys": [
+    "response",
+    "pdf_url",
+    "pdf_path"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "fetch_pricing",
+  "description": "Task to fetch product pricing from database",
+  "retryCount": 3,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 10,
+  "timeoutSeconds": 60,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 30,
+  "inputKeys": [
+    "products",
+    "http_request"
+  ],
+  "outputKeys": [
+    "response",
+    "pricing",
+    "line_items"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

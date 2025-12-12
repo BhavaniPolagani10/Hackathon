@@ -13,6 +13,27 @@ This project combines a React frontend for sales tracking with a FastAPI backend
 
 ## Quick Start
 
+### Two Deployment Options
+
+#### Option 1: Docker with Netflix Conductor (Recommended for Production)
+
+Run the entire stack with workflow orchestration:
+
+```bash
+# See conductor/QUICKSTART.md for detailed instructions
+docker-compose up -d
+./conductor/setup.sh
+```
+
+Access services at:
+- **Conductor UI**: http://localhost:5555
+- **Backend API**: http://localhost:8000
+- **Frontend**: http://localhost:3000
+
+📘 **Full Guide**: [Conductor Integration Guide](./conductor/QUICKSTART.md)
+
+#### Option 2: Local Development
+
 ### Prerequisites
 
 - **Python 3.9+** for backend
@@ -75,6 +96,14 @@ npm run dev
 │   └── .env.example
 │
 ├── db/                  # Database schemas
+├── conductor/           # Netflix Conductor workflows
+│   ├── workflows/      # Workflow definitions (JSON)
+│   ├── tasks/          # Task definitions (JSON)
+│   ├── examples/       # Example scripts
+│   ├── setup.sh        # Conductor setup script
+│   ├── QUICKSTART.md   # Quick start guide
+│   └── README.md       # Detailed documentation
+├── docker-compose.yml  # Docker Compose configuration
 ├── start.sh            # Start script for both services
 └── README_INTEGRATION.md  # Detailed integration guide
 ```
@@ -97,6 +126,16 @@ npm run dev
 - **PDF Export**: Professional PDF quote documents
 - **Database Integration**: PostgreSQL for data persistence
 - **REST API**: Full API documentation with Swagger UI
+
+### Workflow Orchestration (Netflix Conductor)
+
+- **Email Summarization Workflow**: Automated email analysis pipeline
+- **Quote Generation Workflow**: End-to-end quote creation process
+- **Task Orchestration**: Retry logic, error handling, timeout management
+- **Real-time Monitoring**: Track workflow execution in Conductor UI
+- **Scalable Architecture**: Docker-based deployment with service orchestration
+
+📘 **Learn more**: [Conductor Quick Start](./conductor/QUICKSTART.md)
 
 ## Integration
 
@@ -218,6 +257,8 @@ npm run build
 
 ## Documentation
 
+- **[Conductor Quick Start](./conductor/QUICKSTART.md)** - Get started with Docker & Conductor in 5 minutes
+- **[Conductor Guide](./conductor/README.md)** - Complete Conductor integration documentation
 - [Integration Guide](./README_INTEGRATION.md) - Detailed setup and troubleshooting
 - [Frontend Integration](./frontend/INTEGRATION.md) - Frontend-specific details
 - [Backend Setup](./backend/SETUP_GUIDE.md) - Backend configuration guide
@@ -238,6 +279,13 @@ npm run build
 - Azure OpenAI (GPT-4o)
 - PostgreSQL
 - ReportLab (PDF generation)
+- Pydantic
+
+### Workflow Orchestration
+- Netflix Conductor
+- Docker & Docker Compose
+- Elasticsearch (indexing)
+- Redis (queue)
 - Pydantic
 
 ## Troubleshooting

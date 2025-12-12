@@ -1,0 +1,20 @@
+{
+  "name": "generate_quote",
+  "description": "Task to generate final quote document",
+  "retryCount": 3,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 10,
+  "timeoutSeconds": 90,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 60,
+  "inputKeys": [
+    "thread_id",
+    "http_request"
+  ],
+  "outputKeys": [
+    "response",
+    "quote",
+    "quote_number"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}
