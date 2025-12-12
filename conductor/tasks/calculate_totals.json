@@ -1,0 +1,22 @@
+{
+  "name": "calculate_totals",
+  "description": "Task to calculate quote totals with tax and discounts",
+  "retryCount": 2,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 5,
+  "timeoutSeconds": 30,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 15,
+  "inputKeys": [
+    "line_items",
+    "tax_rate",
+    "discount_rate"
+  ],
+  "outputKeys": [
+    "subtotal",
+    "tax",
+    "discount",
+    "total"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

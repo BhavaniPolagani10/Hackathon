@@ -1,0 +1,20 @@
+{
+  "name": "extract_products",
+  "description": "Task to extract product requirements from email summary",
+  "retryCount": 2,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 5,
+  "timeoutSeconds": 30,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 15,
+  "inputKeys": [
+    "summary",
+    "products"
+  ],
+  "outputKeys": [
+    "products",
+    "product_codes",
+    "quantities"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

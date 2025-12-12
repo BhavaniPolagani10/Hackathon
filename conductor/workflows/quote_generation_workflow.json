@@ -1,0 +1,132 @@
+{
+  "name": "quote_generation_workflow",
+  "description": "End-to-end workflow for generating quotes from email conversations",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "fetch_email_thread",
+      "taskReferenceName": "fetch_email_thread_ref",
+      "type": "SIMPLE",
+      "description": "Fetch email thread from database",
+      "inputParameters": {
+        "thread_id": "${workflow.input.thread_id}",
+        "http_request": {
+          "uri": "http://backend:8000/api/v1/emails/${workflow.input.thread_id}",
+          "method": "GET",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    },
+    {
+      "name": "summarize_email",
+      "taskReferenceName": "summarize_email_ref",
+      "type": "SUB_WORKFLOW",
+      "description": "Call email summarization sub-workflow",
+      "subWorkflowParam": {
+        "name": "email_summarization_workflow",
+        "version": 1
+      },
+      "inputParameters": {
+        "thread_id": "${workflow.input.thread_id}"
+      }
+    },
+    {
+      "name": "extract_products",
+      "taskReferenceName": "extract_products_ref",
+      "type": "SIMPLE",
+      "description": "Extract product requirements from summary",
+      "inputParameters": {
+        "summary": "${summarize_email_ref.output.summary}",
+        "products": "${summarize_email_ref.output.summary.products}"
+      }
+    },
+    {
+      "name": "fetch_pricing",
+      "taskReferenceName": "fetch_pricing_ref",
+      "type": "SIMPLE",
+      "description": "Fetch pricing for each product from database",
+      "inputParameters": {
+        "products": "${extract_products_ref.output.products}",
+        "http_request": {
+          "uri": "http://backend:8000/api/v1/quotes/pricing",
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "products": "${extract_products_ref.output.products}"
+          }
+        }
+      }
+    },
+    {
+      "name": "calculate_totals",
+      "taskReferenceName": "calculate_totals_ref",
+      "type": "SIMPLE",
+      "description": "Calculate quote totals with tax and discounts",
+      "inputParameters": {
+        "line_items": "${fetch_pricing_ref.output.response.body}",
+        "tax_rate": 0.08,
+        "discount_rate": "${workflow.input.discount_rate}"
+      }
+    },
+    {
+      "name": "generate_quote",
+      "taskReferenceName": "generate_quote_ref",
+      "type": "SIMPLE",
+      "description": "Generate final quote document",
+      "inputParameters": {
+        "thread_id": "${workflow.input.thread_id}",
+        "http_request": {
+          "uri": "http://backend:8000/api/v1/quotes/generate?thread_id=${workflow.input.thread_id}",
+          "method": "POST",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    },
+    {
+      "name": "generate_pdf",
+      "taskReferenceName": "generate_pdf_ref",
+      "type": "SIMPLE",
+      "description": "Generate PDF version of the quote",
+      "inputParameters": {
+        "quote_number": "${generate_quote_ref.output.response.body.quote_number}",
+        "thread_id": "${workflow.input.thread_id}",
+        "http_request": {
+          "uri": "http://backend:8000/api/v1/quotes/${generate_quote_ref.output.response.body.quote_number}/pdf?thread_id=${workflow.input.thread_id}",
+          "method": "GET",
+          "headers": {
+            "Accept": "application/pdf"
+          }
+        }
+      }
+    },
+    {
+      "name": "notify_completion",
+      "taskReferenceName": "notify_completion_ref",
+      "type": "SIMPLE",
+      "description": "Send notification that quote is ready",
+      "inputParameters": {
+        "quote_number": "${generate_quote_ref.output.response.body.quote_number}",
+        "customer_email": "${fetch_email_thread_ref.output.response.body.customer_email}",
+        "pdf_url": "${generate_pdf_ref.output.pdf_url}"
+      }
+    }
+  ],
+  "outputParameters": {
+    "quote_number": "${generate_quote_ref.output.response.body.quote_number}",
+    "quote": "${generate_quote_ref.output.response.body}",
+    "pdf_url": "${generate_pdf_ref.output.pdf_url}",
+    "status": "completed"
+  },
+  "schemaVersion": 2,
+  "restartable": true,
+  "workflowStatusListenerEnabled": true,
+  "ownerEmail": "hackathon@example.com",
+  "timeoutPolicy": "TIME_OUT_WF",
+  "timeoutSeconds": 600
+}

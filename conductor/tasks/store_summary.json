@@ -1,0 +1,19 @@
+{
+  "name": "store_summary",
+  "description": "Task to store email summary results",
+  "retryCount": 3,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 10,
+  "timeoutSeconds": 30,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 15,
+  "inputKeys": [
+    "summary",
+    "thread_id"
+  ],
+  "outputKeys": [
+    "stored",
+    "summary_id"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

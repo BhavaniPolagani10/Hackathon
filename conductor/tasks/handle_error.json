@@ -1,0 +1,19 @@
+{
+  "name": "handle_error",
+  "description": "Task to handle errors in workflow execution",
+  "retryCount": 1,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 5,
+  "timeoutSeconds": 30,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 15,
+  "inputKeys": [
+    "error",
+    "thread_id"
+  ],
+  "outputKeys": [
+    "error_handled",
+    "error_message"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "extract_messages",
+  "description": "Task to extract and process messages from email thread",
+  "retryCount": 2,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 5,
+  "timeoutSeconds": 30,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 15,
+  "inputKeys": [
+    "messages",
+    "thread_id"
+  ],
+  "outputKeys": [
+    "processed_messages",
+    "message_count"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}

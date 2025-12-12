@@ -1,0 +1,20 @@
+{
+  "name": "fetch_email_thread",
+  "description": "Task to fetch email thread from backend API",
+  "retryCount": 3,
+  "retryLogic": "FIXED",
+  "retryDelaySeconds": 10,
+  "timeoutSeconds": 60,
+  "timeoutPolicy": "TIME_OUT_WF",
+  "responseTimeoutSeconds": 30,
+  "inputKeys": [
+    "thread_id",
+    "http_request"
+  ],
+  "outputKeys": [
+    "response",
+    "email_thread",
+    "messages"
+  ],
+  "ownerEmail": "hackathon@example.com"
+}
