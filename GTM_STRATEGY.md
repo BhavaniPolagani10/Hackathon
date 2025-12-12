@@ -523,7 +523,7 @@ flowchart TD
 - **Customer Acquisition Cost (CAC):** $15,000
 - **Average Contract Value (ACV):** $150,000 (Professional tier annual)
 - **Customer Lifetime Value (LTV):** $450,000 (3-year average)
-- **LTV:CAC Ratio:** 30:1 (target: 3:1+)
+- **LTV:CAC Ratio:** 30:1 (well above 3:1 target threshold for healthy SaaS business)
 - **Payback Period:** 3-4 months
 
 **CAC Breakdown:**
@@ -755,7 +755,7 @@ gantt
 - **Total GTM Budget:** $7.25M
 
 **Expected Revenue (Year 1):** $18M ARR
-**GTM Efficiency Ratio:** 2.48:1
+**GTM Efficiency Ratio:** 2.48:1 (calculated as Revenue/GTM Budget: $18M/$7.25M)
 
 ---
 
