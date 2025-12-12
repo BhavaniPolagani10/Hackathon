@@ -522,14 +522,20 @@ flowchart TD
 **Target Metrics:**
 - **Customer Acquisition Cost (CAC):** $15,000
 - **Average Contract Value (ACV):** $150,000 (Professional tier annual)
-- **Customer Lifetime Value (LTV):** $450,000 (3-year average)
+- **Customer Lifetime Value (LTV):** $450,000 (3-year average customer lifetime)
 - **LTV:CAC Ratio:** 30:1 (well above 3:1 target threshold for healthy SaaS business)
+  - *Note: This exceptionally high ratio results from the product's rapid implementation (11 days vs. industry standard 3-6 months), which significantly reduces customer acquisition friction and shortens sales cycles. The Professional tier target market (100-user organizations) also enables efficient scaling with minimal incremental acquisition cost.*
 - **Payback Period:** 3-4 months
 
 **CAC Breakdown:**
 - Sales costs (salaries, commissions): $8,000
 - Marketing costs (campaigns, tools): $5,000
 - Technology costs (CRM, tools): $2,000
+
+**LTV Calculation Methodology:**
+- Average annual contract value: $150,000 (Professional tier)
+- Average customer lifetime: 3 years (based on industry retention rates)
+- LTV = ACV × Customer Lifetime = $150,000 × 3 = $450,000
 
 ---
 
@@ -756,6 +762,8 @@ gantt
 
 **Expected Revenue (Year 1):** $18M ARR
 **GTM Efficiency Ratio:** 2.48:1 (calculated as Revenue/GTM Budget: $18M/$7.25M)
+
+*Industry Benchmark Context: A GTM efficiency ratio of 2-3:1 is considered healthy for Year 1 SaaS companies. Our target of 2.48:1 indicates that for every dollar spent on GTM, we expect to generate $2.48 in annual recurring revenue, positioning us competitively within the industry standard range.*
 
 ---
 
