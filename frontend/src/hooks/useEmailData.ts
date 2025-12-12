@@ -34,7 +34,7 @@ export function useEmailData() {
         // Transform threads to opportunities with their respective quotes
         const opportunitiesData: Opportunity[] = threads.map((thread, index) => {
           const quoteResult = quoteResults[index];
-          let quote = undefined;
+          let quote;
           
           if (quoteResult.status === 'fulfilled') {
             quote = quoteResult.value;
