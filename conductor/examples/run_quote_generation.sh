@@ -20,9 +20,9 @@ echo ""
 echo "Starting workflow..."
 WORKFLOW_ID=$(curl -s -X POST "$CONDUCTOR_URL/api/workflow/quote_generation_workflow" \
     -H "Content-Type: application/json" \
-    -d "{\"thread_id\": $THREAD_ID, \"discount_rate\": $DISCOUNT_RATE}" | tr -d '"')
+    -d "{\"thread_id\": $THREAD_ID, \"discount_rate\": $DISCOUNT_RATE}" | jq -r '.')
 
-if [ -z "$WORKFLOW_ID" ]; then
+if [ -z "$WORKFLOW_ID" ] || [ "$WORKFLOW_ID" = "null" ]; then
     echo "ERROR: Failed to start workflow"
     exit 1
 fi

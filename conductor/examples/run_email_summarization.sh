@@ -18,9 +18,9 @@ echo ""
 echo "Starting workflow..."
 WORKFLOW_ID=$(curl -s -X POST "$CONDUCTOR_URL/api/workflow/email_summarization_workflow" \
     -H "Content-Type: application/json" \
-    -d "{\"thread_id\": $THREAD_ID}" | tr -d '"')
+    -d "{\"thread_id\": $THREAD_ID}" | jq -r '.')
 
-if [ -z "$WORKFLOW_ID" ]; then
+if [ -z "$WORKFLOW_ID" ] || [ "$WORKFLOW_ID" = "null" ]; then
     echo "ERROR: Failed to start workflow"
     exit 1
 fi

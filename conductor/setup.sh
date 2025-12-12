@@ -43,9 +43,12 @@ wait_for_service() {
 }
 
 # Check if Docker Compose is running
-if ! docker-compose ps | grep -q "Up"; then
+echo "Checking Docker Compose services..."
+if ! docker-compose ps 2>/dev/null | grep -q "Up"; then
     echo "Starting Docker Compose services..."
     docker-compose up -d
+else
+    echo "Docker Compose services already running"
 fi
 
 # Wait for services to be ready
@@ -67,14 +70,19 @@ for task_file in conductor/tasks/*.json; do
     
     response=$(curl -s -w "\n%{http_code}" -X POST "$CONDUCTOR_URL/api/metadata/taskdefs" \
         -H "Content-Type: application/json" \
-        -d @"$task_file")
+        -d @"$task_file" 2>&1)
     
     http_code=$(echo "$response" | tail -n1)
     
     if [ "$http_code" = "204" ] || [ "$http_code" = "200" ]; then
         echo -e " ${GREEN}✓${NC}"
+    elif [ "$http_code" = "409" ]; then
+        echo -e " ${YELLOW}⚠${NC} (already exists)"
     else
-        echo -e " ${YELLOW}⚠${NC} (might already exist)"
+        echo -e " ${RED}✗${NC} (HTTP $http_code)"
+        if [ -n "$response" ]; then
+            echo "    Error: $(echo "$response" | head -n-1)"
+        fi
     fi
 done
 

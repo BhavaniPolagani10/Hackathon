@@ -406,6 +406,25 @@ docker-compose logs -f backend
 3. Check Azure OpenAI configuration
 4. Review workflow input parameters
 
+## Known Limitations and Future Improvements
+
+### Current Limitations
+
+1. **Workflow Validation**: Workflows assume specific API response structures. Future versions should include response validation.
+2. **Error Handling**: Some edge cases may not be fully handled. Monitor workflows closely in production.
+3. **Image Size**: Backend Docker image could be optimized with multi-stage builds for production.
+
+### Recommended Improvements
+
+For production deployments, consider:
+
+1. **Add response validation** in workflow tasks to handle unexpected API responses
+2. **Implement circuit breakers** for external service calls (Azure OpenAI)
+3. **Use multi-stage Docker builds** to reduce image size
+4. **Add monitoring and alerting** for failed workflows
+5. **Implement authentication** for Conductor API endpoints
+6. **Set up logging aggregation** (e.g., ELK stack)
+
 ## Advanced Configuration
 
 ### Custom Conductor Configuration
